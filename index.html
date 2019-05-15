@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<body style="margin: 0">
+    <div id="info_div" style="display: none">
+        <span id="label"></span>
+    </div>
+    <div id="selector_div" style="display: none">
+        <input type="text" id="set" value="4d6"></input><br />
+        <button id="clear">clear</button>
+        <button style="margin-left: 0.6em" id="throw">throw</button>
+    </div>
+    <div id="canvas"></div>
+
+    <script src="three.min.js"></script>
+    <script src="cannon.min.js"></script>
+    <!--script type="text/javascript" src="https://drive.google.com/uc?id=0ByGeV2TiysmOelhLSnlUQ3ZMc2M"></script>
+    <script type="text/javascript" src="https://drive.google.com/uc?id=0ByGeV2TiysmOczhfWW90OEV0dmM"></script-->
+
+    <script type="text/javascript" src="teal.js"></script>
+    <script type="text/javascript" src="dice.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" defer="defer">
+        dice_initialize(document.body);
+    </script>
+</body>
+
+</html>
