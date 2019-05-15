@@ -402,15 +402,15 @@
         this.dice_body_material = new CANNON.Material();
         var desk_body_material = new CANNON.Material();
         var barrier_body_material = new CANNON.Material();
-        this.world.addContactMaterial(new CANNON.ContactMaterial(
-                    desk_body_material, this.dice_body_material, 0.01, 0.5));
+        this.world.addContactMaterial(new CANNON.ContactMaterial( //TODO: change to object
+                    desk_body_material, this.dice_body_material, {friction: 0.01, restitution: 0.5}));
         this.world.addContactMaterial(new CANNON.ContactMaterial(
                     barrier_body_material, this.dice_body_material, 0, 1.0));
         this.world.addContactMaterial(new CANNON.ContactMaterial(
                     this.dice_body_material, this.dice_body_material, 0, 0.5));
 
         this.world.add(new CANNON.RigidBody(0, new CANNON.Plane(), desk_body_material));
-        var barrier;
+        var barrier; //TODO: change to body()
         barrier = new CANNON.RigidBody(0, new CANNON.Plane(), barrier_body_material);
         barrier.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), Math.PI / 2);
         barrier.position.set(0, this.h * 0.93, 0);
