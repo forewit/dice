@@ -674,8 +674,7 @@
         }
         if (dice.dice_type == 'd4' && num != 0) {
             if (num < 0) num += 4;
-            dice.material = new THREE.MeshFaceMaterial(
-                    that.create_d4_materials(that.scale / 2, that.scale * 2, d4_labels[num]));
+            dice.material = that.create_d4_materials(that.scale / 2, that.scale * 2, d4_labels[num]);
         }
         dice.geometry = geom;
     }
