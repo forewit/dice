@@ -273,7 +273,7 @@
         specular: 0x172022,
         color: 0xf0f0f0,
         shininess: 40,
-        shading: THREE.FlatShading, //TODO
+        flatShading: true, //TODO
     };
     this.label_color = '#aaaaaa';
     this.dice_color = '#202020';
@@ -293,50 +293,43 @@
 
     this.create_d4 = function() {
         if (!this.d4_geometry) this.d4_geometry = this.create_d4_geometry(this.scale * 1.2);
-        if (!this.d4_material) this.d4_material = new THREE.MeshFaceMaterial(
-                this.create_d4_materials(this.scale / 2, this.scale * 2, d4_labels[0]));
+        if (!this.d4_material) this.d4_material = this.create_d4_materials(this.scale / 2, this.scale * 2, d4_labels[0]);
         return new THREE.Mesh(this.d4_geometry, this.d4_material);
     }
 
     this.create_d6 = function() {
         if (!this.d6_geometry) this.d6_geometry = this.create_d6_geometry(this.scale * 0.9);
-        if (!this.dice_material) this.dice_material = new THREE.MeshFaceMaterial(
-                this.create_dice_materials(this.standart_d20_dice_face_labels, this.scale / 2, 1.0));
+        if (!this.dice_material) this.dice_material = this.create_dice_materials(this.standart_d20_dice_face_labels, this.scale / 2, 1.0);
         return new THREE.Mesh(this.d6_geometry, this.dice_material);
     }
 
     this.create_d8 = function() {
         if (!this.d8_geometry) this.d8_geometry = this.create_d8_geometry(this.scale);
-        if (!this.dice_material) this.dice_material = new THREE.MeshFaceMaterial(
-                this.create_dice_materials(this.standart_d20_dice_face_labels, this.scale / 2, 1.2));
+        if (!this.dice_material) this.dice_material = this.create_dice_materials(this.standart_d20_dice_face_labels, this.scale / 2, 1.2);
         return new THREE.Mesh(this.d8_geometry, this.dice_material);
     }
 
     this.create_d10 = function() {
         if (!this.d10_geometry) this.d10_geometry = this.create_d10_geometry(this.scale * 0.9);
-        if (!this.dice_material) this.dice_material = new THREE.MeshFaceMaterial(
-                this.create_dice_materials(this.standart_d20_dice_face_labels, this.scale / 2, 1.0));
+        if (!this.dice_material) this.dice_material = this.create_dice_materials(this.standart_d20_dice_face_labels, this.scale / 2, 1.0);
         return new THREE.Mesh(this.d10_geometry, this.dice_material);
     }
 
     this.create_d12 = function() {
         if (!this.d12_geometry) this.d12_geometry = this.create_d12_geometry(this.scale * 0.9);
-        if (!this.dice_material) this.dice_material = new THREE.MeshFaceMaterial(
-                this.create_dice_materials(this.standart_d20_dice_face_labels, this.scale / 2, 1.0));
+        if (!this.dice_material) this.dice_material = this.create_dice_materials(this.standart_d20_dice_face_labels, this.scale / 2, 1.0);
         return new THREE.Mesh(this.d12_geometry, this.dice_material);
     }
 
     this.create_d20 = function() {
         if (!this.d20_geometry) this.d20_geometry = this.create_d20_geometry(this.scale);
-        if (!this.dice_material) this.dice_material = new THREE.MeshFaceMaterial(
-                this.create_dice_materials(this.standart_d20_dice_face_labels, this.scale / 2, 1.0));
+        if (!this.dice_material) this.dice_material = this.create_dice_materials(this.standart_d20_dice_face_labels, this.scale / 2, 1.0);
         return new THREE.Mesh(this.d20_geometry, this.dice_material);
     }
 
     this.create_d100 = function() {
         if (!this.d10_geometry) this.d10_geometry = this.create_d10_geometry(this.scale * 0.9);
-        if (!this.d100_material) this.d100_material = new THREE.MeshFaceMaterial(
-                this.create_dice_materials(this.standart_d100_dice_face_labels, this.scale / 2, 1.5));
+        if (!this.d100_material) this.d100_material = this.create_dice_materials(this.standart_d100_dice_face_labels, this.scale / 2, 1.5);
         return new THREE.Mesh(this.d10_geometry, this.d100_material);
     }
 
@@ -472,13 +465,12 @@
         this.light.target.position.set(0, 0, 0);
         this.light.distance = mw * 5;
         this.light.castShadow = true;
-        this.light.shadowCameraNear = mw / 10;
-        this.light.shadowCameraFar = mw * 5;
-        this.light.shadowCameraFov = 50;
-        this.light.shadowBias = 0.001;
-        this.light.shadowDarkness = 1.1;
-        this.light.shadowMapWidth = 1024;
-        this.light.shadowMapHeight = 1024;
+        this.light.shadow.camera.near = mw / 10;
+        this.light.shadow.camera.far = mw * 5;
+        this.light.shadow.camera.fov = 50;
+        this.light.shadow.bias = 0.001;
+        this.light.shadow.mapSize.width = 1024;
+        this.light.shadow.mapSize.height = 1024;
         this.scene.add(this.light);
 
         if (this.desk) this.scene.remove(this.desk);
