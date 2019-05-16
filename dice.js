@@ -430,26 +430,27 @@
         that.leftBarrier.position.set(-this.w * 0.93, 0, 0);
         this.world.add(that.leftBarrier);
 
+        this.reinit(container, dimentions);
+
         this.last_time = 0;
         this.running = false;
-        this.reinit(container, dimentions);
 
         this.renderer.render(this.scene, this.camera);
     }
 
-    this.dice_box.prototype.reinit = function(container, dimentions) {
+    this.dice_box.prototype.reinit = function(container, dimensions) {
         this.cw = container.clientWidth / 2;
         this.ch = container.clientHeight / 2;
-        if (dimentions) {
-            this.w = dimentions.w;
-            this.h = dimentions.h;
+        if (dimensions) {
+            this.w = dimensions.w;
+            this.h = dimensions.h;
         }
         else {
             this.w = this.cw;
             this.h = this.ch;
         }
         this.aspect = Math.min(this.cw / this.w, this.ch / this.h);
-        that.scale = Math.sqrt(this.w * this.w + this.h * this.h) / 13;
+        //that.scale = Math.sqrt(this.w * this.w + this.h * this.h) / 13;
 
         this.renderer.setSize(this.cw * 2, this.ch * 2);
 

@@ -7,6 +7,7 @@ function dice_initialize() {
     container.style.height = window.innerHeight - 3 + 'px';
 
     $t.dice.use_true_random = false;
+    $t.dice.scale = 75;
     //$t.dice.use_shadows = false;
     //$t.dice.dice_color = '#808080';
     //$t.dice.label_color = '#202020';
@@ -68,9 +69,10 @@ function dice_initialize() {
         return $t.dice.parse_notation('d100 + d100 + 4d6 @ 1 1 1');
     }, before_roll, after_roll);
 
+    box.draw_selector();
+
     /*
     box.bind_mouse(container, notation_getter, before_roll, after_roll);
-    box.draw_selector();
     $t.bind(canvas, ['mouseup', 'touchend'], function(ev) {
         ev.stopPropagation();
         if (selector_div.style.display == 'none') {
