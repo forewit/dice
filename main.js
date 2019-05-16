@@ -15,6 +15,7 @@ function dice_initialize() {
     //$t.dice.spot_light_color = 0xefdfd5;
 
     var box = new $t.dice.dice_box(container, { w: window.innerWidth, h: window.innerHeight });
+    //box.animate_selector = false;
 
     $t.bind(window, 'resize', function() {
         container.style.width = window.innerWidth + 'px';
