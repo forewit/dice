@@ -279,9 +279,9 @@
     this.dice_color = '#202020';
     this.ambient_light_color = 0xf0f5fb;
     this.spot_light_color = 0xefdfd5;
-    this.selector_back_colors = { color: 0x404040, shininess: 0, emissive: 0x858787 };
-    this.desk_color = 0xdfdfdf;
-    this.use_shadows = true;
+    //this.selector_back_colors = { color: 0x404040, shininess: 0, emissive: 0x858787 };
+    //this.desk_color = 0xdfdfdf;
+    //this.use_shadows = false;
 
     this.known_types = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', 'd100'];
     this.dice_face_range = { 'd4': [1, 4], 'd6': [1, 6], 'd8': [1, 8], 'd10': [0, 9], 
@@ -383,14 +383,13 @@
         this.world = new CANNON.World();
 
         this.renderer = window.WebGLRenderingContext
-            ? new THREE.WebGLRenderer({ antialias: true })
-            : new THREE.CanvasRenderer({ antialias: true });
+            ? new THREE.WebGLRenderer({ antialias: true, alpha: true })
+            : new THREE.CanvasRenderer({ antialias: true, alpha: true });
         container.appendChild(this.renderer.domElement);
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFShadowMap;
-        this.renderer.setClearColor(0xffffff, 1);
+        this.renderer.setClearColor(0xffffff, 0);
 
-        this.reinit(container, dimentions);
 
         this.world.gravity.set(0, 0, -9.8 * 800);
         this.world.broadphase = new CANNON.NaiveBroadphase();
@@ -411,28 +410,29 @@
 
         this.world.add(new CANNON.RigidBody(0, new CANNON.Plane(), desk_body_material));
         var barrier;
-        barrier = new CANNON.RigidBody(0, new CANNON.Plane(), barrier_body_material);
-        barrier.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), Math.PI / 2);
-        barrier.position.set(0, this.h * 0.93, 0);
-        this.world.add(barrier);
+        that.topBarrier = new CANNON.RigidBody(0, new CANNON.Plane(), barrier_body_material);
+        that.topBarrier.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), Math.PI / 2);
+        that.topBarrier.position.set(0, this.h * 0.93, 0);
+        this.world.add(that.topBarrier);
 
-        barrier = new CANNON.RigidBody(0, new CANNON.Plane(), barrier_body_material);
-        barrier.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
-        barrier.position.set(0, -this.h * 0.93, 0);
-        this.world.add(barrier);
+        that.bottomBarrier = new CANNON.RigidBody(0, new CANNON.Plane(), barrier_body_material);
+        that.bottomBarrier.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
+        that.bottomBarrier.position.set(0, -this.h * 0.93, 0);
+        this.world.add(that.bottomBarrier);
 
-        barrier = new CANNON.RigidBody(0, new CANNON.Plane(), barrier_body_material);
-        barrier.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), -Math.PI / 2);
-        barrier.position.set(this.w * 0.93, 0, 0);
-        this.world.add(barrier);
+        that.rightBarrier = new CANNON.RigidBody(0, new CANNON.Plane(), barrier_body_material);
+        that.rightBarrier.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), -Math.PI / 2);
+        that.rightBarrier.position.set(this.w * 0.93, 0, 0);
+        this.world.add(that.rightBarrier);
 
-        barrier = new CANNON.RigidBody(0, new CANNON.Plane(), barrier_body_material);
-        barrier.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
-        barrier.position.set(-this.w * 0.93, 0, 0);
-        this.world.add(barrier);
+        that.leftBarrier = new CANNON.RigidBody(0, new CANNON.Plane(), barrier_body_material);
+        that.leftBarrier.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
+        that.leftBarrier.position.set(-this.w * 0.93, 0, 0);
+        this.world.add(that.leftBarrier);
 
         this.last_time = 0;
         this.running = false;
+        this.reinit(container, dimentions);
 
         this.renderer.render(this.scene, this.camera);
     }
@@ -474,12 +474,19 @@
         this.light.shadow.mapSize.height = 1024;
         this.scene.add(this.light);
 
+        //reset bounding box
+        that.topBarrier.position.set(0, this.h * 0.93, 0);
+        that.bottomBarrier.position.set(0, -this.h * 0.93, 0);
+        that.rightBarrier.position.set(this.w * 0.93, 0, 0);
+        that.leftBarrier.position.set(-this.w * 0.93, 0, 0);
+
+        /*
         if (this.desk) this.scene.remove(this.desk);
         this.desk = new THREE.Mesh(new THREE.PlaneGeometry(this.w * 2, this.h * 2, 1, 1), 
                 new THREE.MeshPhongMaterial({ color: that.desk_color }));
         this.desk.receiveShadow = that.use_shadows;
         this.scene.add(this.desk);
-
+        */
         this.renderer.render(this.scene, this.camera);
     }
 
@@ -730,13 +737,15 @@
     this.dice_box.prototype.draw_selector = function() {
         this.clear();
         var step = this.w / 4.5;
+
+        /*
         this.pane = new THREE.Mesh(new THREE.PlaneGeometry(this.w * 6, this.h * 6, 1, 1), 
                 new THREE.MeshPhongMaterial(that.selector_back_colors));
         this.pane.receiveShadow = true;
         this.pane.position.set(0, 0, 1);
         this.scene.add(this.pane);
-
-        var mouse_captured = false;
+        */
+        //var mouse_captured = false;
 
         for (var i = 0, pos = -3; i < that.known_types.length; ++i, ++pos) {
             var dice = $t.dice['create_' + that.known_types[i]]();

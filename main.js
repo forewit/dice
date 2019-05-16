@@ -1,67 +1,28 @@
 "use strict";
 
 function dice_initialize() {
-    $t.remove($t.id('loading_text'));
 
-    var canvas = $t.id('canvas');
-    var label = $t.id('label');
-    var set = $t.id('set');
-    var selector_div = $t.id('selector_div');
-    var info_div = $t.id('info_div');
-    on_set_change();
+    var container = $t.id('dice-box');
+    container.style.width = window.innerWidth + 'px';
+    container.style.height = window.innerHeight - 3 + 'px';
 
-    //params
     $t.dice.use_true_random = false;
     //$t.dice.dice_color = '#808080';
     //$t.dice.label_color = '#202020';
-    //$t.dice.use_shadows = false;
-    //$t.dice.desk_color = 0x00ff00;
 
-    function on_set_change(ev) { set.style.width = set.value.length + 3 + 'ex'; }
-    $t.bind(set, 'keyup', on_set_change);
-    $t.bind(set, 'mousedown', function(ev) { ev.stopPropagation(); });
-    $t.bind(set, 'mouseup', function(ev) { ev.stopPropagation(); });
-    $t.bind(set, 'focus', function(ev) { $t.set(canvas, { class: '' }); });
-    $t.bind(set, 'blur', function(ev) { $t.set(canvas, { class: 'noselect' }); });
-
-    $t.bind($t.id('clear'), ['mouseup', 'touchend'], function(ev) {
-        ev.stopPropagation();
-        set.value = '0';
-        on_set_change();
-    });
-
-
-    var rect = canvas.getBoundingClientRect();
-    console.log(rect);
-    var box = new $t.dice.dice_box(canvas, { w: rect.width, h: rect.height });
-    box.animate_selector = false;
+    var box = new $t.dice.dice_box(container, { w: window.innerWidth, h: window.innerHeight });
 
     $t.bind(window, 'resize', function() {
-        canvas.style.width = '100%';
-        rect = canvas.getBoundingClientRect();
-        box.reinit(canvas, { w: rect.width, h: rect.height });
-        if (selector_div.style.display == 'inline-block') {
-            show_selector();
-        }
+        container.style.width = window.innerWidth + 'px';
+        container.style.height = window.innerHeight - 3 + 'px';
+        box.reinit(container, { w: window.innerWidth, h: window.innerHeight });
     });
 
-    function show_selector() {
-        info_div.style.display = 'none';
-        selector_div.style.display = 'inline-block';
-        box.draw_selector();
-    }
-
     function before_roll(vectors, notation, callback) {
-        info_div.style.display = 'none';
-        selector_div.style.display = 'none';
         // do here rpc call or whatever to get your own result of throw.
         // then callback with array of your result, example:
         // callback([2, 2, 2, 2]); // for 4d6 where all dice values are 2.
-        callback(notation.result);
-    }
-
-    function notation_getter() {
-        return $t.dice.parse_notation(set.value);
+        callback();
     }
 
     function after_roll(notation, result) {
@@ -72,13 +33,41 @@ function dice_initialize() {
         }
         if (result.length > 1) res += ' = ' + 
                 (result.reduce(function(s, a) { return s + a; }) + notation.constant);
-        label.innerHTML = res;
-        info_div.style.display = 'inline-block';
+        console.log(res);
     }
 
-    box.bind_mouse(canvas, notation_getter, before_roll, after_roll);
-    box.bind_throw($t.id('throw'), notation_getter, before_roll, after_roll);
+    //bind throw buttons
+    box.bind_throw($t.id('d4'), function() {
+        return $t.dice.parse_notation('d4');
+    }, before_roll, after_roll);
 
+    box.bind_throw($t.id('d6'), function() {
+        return $t.dice.parse_notation('d6');
+    }, before_roll, after_roll);
+
+    box.bind_throw($t.id('d8'), function() {
+        return $t.dice.parse_notation('d8');
+    }, before_roll, after_roll);
+
+    box.bind_throw($t.id('d10'), function() {
+        return $t.dice.parse_notation('d10');
+    }, before_roll, after_roll);
+
+    box.bind_throw($t.id('d12'), function() {
+        return $t.dice.parse_notation('d12');
+    }, before_roll, after_roll);
+
+    box.bind_throw($t.id('d20'), function() {
+        return $t.dice.parse_notation('d20 + d20 + 4d6 @ 1 1 1');
+    }, before_roll, after_roll);
+
+    box.bind_throw($t.id('d100'), function() {
+        return $t.dice.parse_notation('d100');
+    }, before_roll, after_roll);
+
+    /*
+    box.bind_mouse(container, notation_getter, before_roll, after_roll);
+    box.draw_selector();
     $t.bind(canvas, ['mouseup', 'touchend'], function(ev) {
         ev.stopPropagation();
         if (selector_div.style.display == 'none') {
@@ -94,6 +83,5 @@ function dice_initialize() {
             on_set_change();
         }
     });
-
-    show_selector();
+    */
 }
