@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 
+<head>
+    <style type="text/css">@import "style.css";</style>
+</head>
+
 <body style="margin: 0">
-    <div id="info_div" style="display: none">
+    <div style="position: absolute" id="info_div">
         <span id="label"></span>
     </div>
-    <div id="selector_div" style="display: none">
+    <div style="position: absolute" id="selector_div">
         <input type="text" id="set" value="4d6"></input><br />
         <button id="clear">clear</button>
-        <button style="margin-left: 0.6em" id="throw">throw</button>
+        <button id="throw">throw</button>
     </div>
+    
     <div id="canvas"></div>
 
     <script src="/libs/three.min.js"></script>

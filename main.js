@@ -1,24 +1,28 @@
 "use strict";
 
-function dice_initialize(container) {
+function dice_initialize() {
+    $t.remove($t.id('loading_text'));
 
     var canvas = $t.id('canvas');
-    canvas.style.width = window.innerWidth - 1 + 'px';
-    canvas.style.height = window.innerHeight - 1 + 'px';
     var label = $t.id('label');
     var set = $t.id('set');
     var selector_div = $t.id('selector_div');
     var info_div = $t.id('info_div');
     on_set_change();
 
+    //params
     $t.dice.use_true_random = false;
+    //$t.dice.dice_color = '#808080';
+    //$t.dice.label_color = '#202020';
+    //$t.dice.use_shadows = false;
+    //$t.dice.desk_color = 0x00ff00;
 
     function on_set_change(ev) { set.style.width = set.value.length + 3 + 'ex'; }
     $t.bind(set, 'keyup', on_set_change);
     $t.bind(set, 'mousedown', function(ev) { ev.stopPropagation(); });
     $t.bind(set, 'mouseup', function(ev) { ev.stopPropagation(); });
-    $t.bind(set, 'focus', function(ev) { $t.set(container, { class: '' }); });
-    $t.bind(set, 'blur', function(ev) { $t.set(container, { class: 'noselect' }); });
+    $t.bind(set, 'focus', function(ev) { $t.set(canvas, { class: '' }); });
+    $t.bind(set, 'blur', function(ev) { $t.set(canvas, { class: 'noselect' }); });
 
     $t.bind($t.id('clear'), ['mouseup', 'touchend'], function(ev) {
         ev.stopPropagation();
@@ -26,28 +30,19 @@ function dice_initialize(container) {
         on_set_change();
     });
 
-    var params = $t.get_url_params();
 
-    if (params.chromakey) {
-        $t.dice.desk_color = 0x00ff00;
-        info_div.style.display = 'none';
-        $t.id('control_panel').style.display = 'none';
-    }
-    if (params.shadows == 0) {
-        $t.dice.use_shadows = false;
-    }
-    if (params.color == 'white') {
-        $t.dice.dice_color = '#808080';
-        $t.dice.label_color = '#202020';
-    }
-
-    var box = new $t.dice.dice_box(canvas, { w: 500, h: 300 });
+    var rect = canvas.getBoundingClientRect();
+    console.log(rect);
+    var box = new $t.dice.dice_box(canvas, { w: rect.width, h: rect.height });
     box.animate_selector = false;
 
     $t.bind(window, 'resize', function() {
-        canvas.style.width = window.innerWidth - 1 + 'px';
-        canvas.style.height = window.innerHeight - 1 + 'px';
-        box.reinit(canvas, { w: 500, h: 300 });
+        canvas.style.width = '100%';
+        rect = canvas.getBoundingClientRect();
+        box.reinit(canvas, { w: rect.width, h: rect.height });
+        if (selector_div.style.display == 'inline-block') {
+            show_selector();
+        }
     });
 
     function show_selector() {
@@ -62,7 +57,7 @@ function dice_initialize(container) {
         // do here rpc call or whatever to get your own result of throw.
         // then callback with array of your result, example:
         // callback([2, 2, 2, 2]); // for 4d6 where all dice values are 2.
-        callback();
+        callback(notation.result);
     }
 
     function notation_getter() {
@@ -70,7 +65,6 @@ function dice_initialize(container) {
     }
 
     function after_roll(notation, result) {
-        if (params.chromakey || params.noresult) return;
         var res = result.join(' ');
         if (notation.constant) {
             if (notation.constant > 0) res += ' +' + notation.constant;
@@ -82,10 +76,10 @@ function dice_initialize(container) {
         info_div.style.display = 'inline-block';
     }
 
-    box.bind_mouse(container, notation_getter, before_roll, after_roll);
+    box.bind_mouse(canvas, notation_getter, before_roll, after_roll);
     box.bind_throw($t.id('throw'), notation_getter, before_roll, after_roll);
 
-    $t.bind(container, ['mouseup', 'touchend'], function(ev) {
+    $t.bind(canvas, ['mouseup', 'touchend'], function(ev) {
         ev.stopPropagation();
         if (selector_div.style.display == 'none') {
             if (!box.rolling) show_selector();
@@ -101,13 +95,5 @@ function dice_initialize(container) {
         }
     });
 
-    if (params.notation) {
-        set.value = params.notation;
-    }
-    if (params.roll) {
-        $t.raise_event($t.id('throw'), 'mouseup');
-    }
-    else {
-        show_selector();
-    }
+    show_selector();
 }
