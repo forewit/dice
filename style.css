@@ -1,3 +1,17 @@
-#canvas {
-    height: 400px;
+.dice {
+    display: inline-block;
+    width: 50px;
+    background: lightcoral;
+    color: white;
+    margin: 10px;
+    padding: 5px 0;
+    text-align: center; 
+    z-index: 100;
+}
+
+#dice-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
