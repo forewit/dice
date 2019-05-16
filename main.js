@@ -7,8 +7,11 @@ function dice_initialize() {
     container.style.height = window.innerHeight - 3 + 'px';
 
     $t.dice.use_true_random = false;
+    //$t.dice.use_shadows = false;
     //$t.dice.dice_color = '#808080';
     //$t.dice.label_color = '#202020';
+    //$t.dice.ambient_light_color = 0xff0000;
+    //$t.dice.spot_light_color = 0xefdfd5;
 
     var box = new $t.dice.dice_box(container, { w: window.innerWidth, h: window.innerHeight });
 
@@ -62,7 +65,7 @@ function dice_initialize() {
     }, before_roll, after_roll);
 
     box.bind_throw($t.id('d100'), function() {
-        return $t.dice.parse_notation('d100');
+        return $t.dice.parse_notation('d100 + d100 + 4d6 @ 1 1 1');
     }, before_roll, after_roll);
 
     /*

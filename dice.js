@@ -281,7 +281,7 @@
     this.spot_light_color = 0xefdfd5;
     //this.selector_back_colors = { color: 0x404040, shininess: 0, emissive: 0x858787 };
     //this.desk_color = 0xdfdfdf;
-    //this.use_shadows = false;
+    this.use_shadows = true;
 
     this.known_types = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', 'd100'];
     this.dice_face_range = { 'd4': [1, 4], 'd6': [1, 6], 'd8': [1, 8], 'd10': [0, 9], 
@@ -409,7 +409,7 @@
                     this.dice_body_material, this.dice_body_material, 0, 0.5));
 
         this.world.add(new CANNON.RigidBody(0, new CANNON.Plane(), desk_body_material));
-        var barrier;
+
         that.topBarrier = new CANNON.RigidBody(0, new CANNON.Plane(), barrier_body_material);
         that.topBarrier.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), Math.PI / 2);
         that.topBarrier.position.set(0, this.h * 0.93, 0);
@@ -470,8 +470,8 @@
         this.light.shadow.camera.fov = 50;
         this.light.shadow.bias = 0.001;
         //this.light.shadowDarkness = 1.1;
-        this.light.shadow.mapSize.width = 1024;
-        this.light.shadow.mapSize.height = 1024;
+        this.light.shadow.mapSize.width = 2048;
+        this.light.shadow.mapSize.height = 2048;
         this.scene.add(this.light);
 
         //reset bounding box
@@ -480,13 +480,15 @@
         that.rightBarrier.position.set(this.w * 0.93, 0, 0);
         that.leftBarrier.position.set(-this.w * 0.93, 0, 0);
 
-        /*
+        
         if (this.desk) this.scene.remove(this.desk);
+
         this.desk = new THREE.Mesh(new THREE.PlaneGeometry(this.w * 2, this.h * 2, 1, 1), 
-                new THREE.MeshPhongMaterial({ color: that.desk_color }));
+                new THREE.ShadowMaterial());
         this.desk.receiveShadow = that.use_shadows;
+        this.desk.material.opacity = 0.2;
         this.scene.add(this.desk);
-        */
+        
         this.renderer.render(this.scene, this.camera);
     }
 
