@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 
 <head>
-    <style type="text/css">@import "style.css";</style>
+    <title>Marc Anderson</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 </head>
 
 <body style="margin: 0">
-    <div id="d4" class="dice">d4</div>
-    <div id="d6" class="dice">d6</div>
-    <div id="d8" class="dice">d8</div>
-    <div id="d10" class="dice">d10</div>
-    <div id="d12" class="dice">d12</div>
-    <div id="d20" class="dice">d20</div>
-    <div id="d100" class="dice">d100</div>
-    
-    <div id="roll" class="dice">custom</div>
-    <input id="set" value="2d6 + 1d20 + 1d8"></input>
-    
+    <div id="button-container">
+        <div id="d4" class="dice"><h3>d4</h3></div>
+        <div id="d6" class="dice"><h3>d6</h3></div>
+        <div id="d8" class="dice"><h3>d8</h3></div>
+        <div id="d10" class="dice"><h3>d10</h3></div>
+        <div id="d12" class="dice"><h3>d12</h3></div>
+        <div id="d20" class="dice"><h3>d20</h3></div>
+        <div id="d100" class="dice"><h3>d100</h3></div>
+        <input id="set" placeholder="2d6 + 1d20 + 1d8"></input>
+    </div>
+
+
     <div id="dice-box"></div>
 
     <script src="./libs/three.min.js"></script>

@@ -91,15 +91,13 @@ function dice_initialize() {
         ev.stopPropagation(); box.rolling = false;
     });
 
-    box.bind_throw($t.id('roll'), function () {
-        return $t.dice.parse_notation($t.id('set').value);
-    }, before_roll, after_roll);
-    $t.bind($t.id('roll'), ['mouseup', 'touchend'], function (ev) {
-        ev.stopPropagation(); box.rolling = false;
-    });
-
-    $t.bind($t.id('d100'), ['mouseup', 'touchend'], function (ev) {
-        ev.stopPropagation(); box.rolling = false;
+    $t.bind($t.id('set'), ['keyup'], function (ev) {
+        if (ev.keyCode == 13) {
+            ev.stopPropagation(); box.rolling = false;
+            box.start_throw(function () {
+                return $t.dice.parse_notation($t.id('set').value);
+            }, before_roll, after_roll);
+        }
     });
 
     
