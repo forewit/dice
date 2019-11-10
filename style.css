@@ -1,6 +1,8 @@
 body {
     margin: 0;
+    background: lightskyblue;
 }
+
 
 /* https://www.cssfontstack.com/Open-Sans */
 
@@ -96,18 +98,15 @@ button:active {
     background: white;
     color: black;
     margin: 10px;
-    z-index: 100;
 }
-
 
 #dice-input {
     width: 150px;
-    margin: 15px;
-}
-
-#dice-roll-button {
-    margin-left: -15px;
-    width: 50px;
+    margin-right: -25px;
+    margin-left: 15px;
+    padding: 3px;
+    display: inline-block;
+    top: 2px;
 }
 
 #button-container {
@@ -120,6 +119,5 @@ button:active {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
-    background: lightgreen;
+    z-index: -11000;
 }

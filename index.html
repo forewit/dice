@@ -9,19 +9,36 @@
 </head>
 
 <body class="no-select">
+
     <div id="button-container">
-        <button id="d4" class="dice-button"><h3>d4</h3></button>
-        <button id="d6" class="dice-button"><h3>d6</h3></button>
-        <button id="d8" class="dice-button"><h3>d8</h3></button>
-        <button id="d10" class="dice-button"><h3>d10</h3></button>
-        <button id="d12" class="dice-button"><h3>d12</h3></button>
-        <button id="d20" class="dice-button"><h3>d20</h3></button>
-        <button id="d100" class="dice-button"><h3>d100</h3></button>
-        <input id="dice-input" placeholder="2d6 + 1d20 + 1d8"></input>
-        <button id="dice-roll-button">roll</button>
+        <button id="d4" class="dice-button">
+            <h3>d4</h3>
+        </button>
+        <button id="d6" class="dice-button">
+            <h3>d6</h3>
+        </button>
+        <button id="d8" class="dice-button">
+            <h3>d8</h3>
+        </button>
+        <button id="d10" class="dice-button">
+            <h3>d10</h3>
+        </button>
+        <button id="d12" class="dice-button">
+            <h3>d12</h3>
+        </button>
+        <button id="d20" class="dice-button">
+            <h3>d20</h3>
+        </button>
+        <button id="d100" class="dice-button">
+            <h3>d100</h3>
+        </button>
+        <div style="display: inline-block;">
+            <input id="dice-input" placeholder="2d6 + 1d20 + 1d8"></input>
+            <button id="dice-roll-button" class="dice-button" style="z-index: -1;">
+                <h3>roll</h3>
+            </button>
+        </div>
     </div>
-
-
     <div id="dice-box"></div>
 
     <script src="./libs/three.min.js"></script>

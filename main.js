@@ -112,7 +112,7 @@ function dice_initialize() {
         ev.stopPropagation();
         box.rolling = false;
         box.start_throw(function () {
-            return $t.dice.parse_notation($t.id('dice-input').value);
+            return $t.dice.parse_notation($t.id('dice-input').value || $t.id('dice-input').placeholder);
         }, before_roll, after_roll);
     });
 
