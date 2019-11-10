@@ -116,5 +116,5 @@ input:focus::placeholder {
     top: 0;
     left: 0;
     z-index: -1;
-    background: lightskyblue;
+    background: lightcoral;
 }
