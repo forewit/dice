@@ -79,11 +79,11 @@ button {
     color: black;
     text-decoration: none;
     outline: none;
-    box-shadow: 2px 2px 4px #222;
+    box-shadow: 1px 2px 3px #222;
 }
 
 button:active {
-    transform: translatey(-2px) scale(1.1);
+    transform: scale(1.1) translate(1px, -3px);
     box-shadow: none;
   }
 
@@ -99,21 +99,6 @@ button:active {
     z-index: 100;
 }
 
-.dice-button>h3 {
-    margin: 0;
-    line-height: 60px;
-}
-
-.dice-button:active {
-    width: 70px;
-    height: 70px;
-    margin: 2px 2px 8px 8px;
-    box-shadow: none;
-}
-
-.dice-button:active>h3 {
-    line-height: 70px;
-}
 
 #dice-input {
     width: 150px;
