@@ -42,7 +42,7 @@ function dice_initialize() {
     }
 
     //throw options
-    $t.bind($t.id('d4'), ['mouseup', 'touchend'], function (ev) {
+    $t.bind($t.id('d4'), ['pointerup'], function (ev) {
         ev.stopPropagation();
         box.rolling = false;
         box.start_throw(function () {
@@ -50,7 +50,7 @@ function dice_initialize() {
         }, before_roll, after_roll);
     });
 
-    $t.bind($t.id('d6'), ['mouseup', 'touchend'], function (ev) {
+    $t.bind($t.id('d6'), ['pointerup'], function (ev) {
         ev.stopPropagation();
         box.rolling = false;
         box.start_throw(function () {
@@ -58,7 +58,7 @@ function dice_initialize() {
         }, before_roll, after_roll);
     });
 
-    $t.bind($t.id('d8'), ['mouseup', 'touchend'], function (ev) {
+    $t.bind($t.id('d8'), ['pointerup'], function (ev) {
         ev.stopPropagation();
         box.rolling = false;
         box.start_throw(function () {
@@ -66,7 +66,7 @@ function dice_initialize() {
         }, before_roll, after_roll);
     });
 
-    $t.bind($t.id('d10'), ['mouseup', 'touchend'], function (ev) {
+    $t.bind($t.id('d10'), ['pointerup'], function (ev) {
         ev.stopPropagation();
         box.rolling = false;
         box.start_throw(function () {
@@ -74,7 +74,7 @@ function dice_initialize() {
         }, before_roll, after_roll);
     });
 
-    $t.bind($t.id('d12'), ['mouseup', 'touchend'], function (ev) {
+    $t.bind($t.id('d12'), ['pointerup'], function (ev) {
         ev.stopPropagation();
         box.rolling = false;
         box.start_throw(function () {
@@ -82,7 +82,7 @@ function dice_initialize() {
         }, before_roll, after_roll);
     });
 
-    $t.bind($t.id('d20'), ['mouseup'], function (ev) {
+    $t.bind($t.id('d20'), ['pointerup'], function (ev) {
         ev.stopPropagation();
         box.rolling = false;
         box.start_throw(function () {
@@ -90,7 +90,7 @@ function dice_initialize() {
         }, before_roll, after_roll);
     });
 
-    $t.bind($t.id('d100'), ['mouseup'], function (ev) {
+    $t.bind($t.id('d100'), ['pointerup'], function (ev) {
         ev.stopPropagation();
         box.rolling = false;
         box.start_throw(function () {
@@ -108,7 +108,7 @@ function dice_initialize() {
         }
     });
 
-    $t.bind($t.id('dice-roll-button'), ['mouseup'], function (ev) {
+    $t.bind($t.id('dice-roll-button'), ['pointerup'], function (ev) {
         ev.stopPropagation();
         box.rolling = false;
         box.start_throw(function () {
