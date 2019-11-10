@@ -42,65 +42,81 @@ function dice_initialize() {
     }
 
     //throw options
-    box.bind_throw($t.id('d4'), function () {
-        return $t.dice.parse_notation('d4');
-    }, before_roll, after_roll);
     $t.bind($t.id('d4'), ['mouseup', 'touchend'], function (ev) {
-        ev.stopPropagation(); box.rolling = false;
+        ev.stopPropagation();
+        box.rolling = false;
+        box.start_throw(function () {
+            return $t.dice.parse_notation('d4');
+        }, before_roll, after_roll);
     });
 
-    box.bind_throw($t.id('d6'), function () {
-        return $t.dice.parse_notation('d6');
-    }, before_roll, after_roll);
     $t.bind($t.id('d6'), ['mouseup', 'touchend'], function (ev) {
-        ev.stopPropagation(); box.rolling = false;
+        ev.stopPropagation();
+        box.rolling = false;
+        box.start_throw(function () {
+            return $t.dice.parse_notation('d6');
+        }, before_roll, after_roll);
     });
 
-    box.bind_throw($t.id('d8'), function () {
-        return $t.dice.parse_notation('d8');
-    }, before_roll, after_roll);
     $t.bind($t.id('d8'), ['mouseup', 'touchend'], function (ev) {
-        ev.stopPropagation(); box.rolling = false;
+        ev.stopPropagation();
+        box.rolling = false;
+        box.start_throw(function () {
+            return $t.dice.parse_notation('d8');
+        }, before_roll, after_roll);
     });
 
-    box.bind_throw($t.id('d10'), function () {
-        return $t.dice.parse_notation('d10');
-    }, before_roll, after_roll);
     $t.bind($t.id('d10'), ['mouseup', 'touchend'], function (ev) {
-        ev.stopPropagation(); box.rolling = false;
+        ev.stopPropagation();
+        box.rolling = false;
+        box.start_throw(function () {
+            return $t.dice.parse_notation('d10');
+        }, before_roll, after_roll);
     });
 
-    box.bind_throw($t.id('d12'), function () {
-        return $t.dice.parse_notation('d12');
-    }, before_roll, after_roll);
     $t.bind($t.id('d12'), ['mouseup', 'touchend'], function (ev) {
-        ev.stopPropagation(); box.rolling = false;
+        ev.stopPropagation();
+        box.rolling = false;
+        box.start_throw(function () {
+            return $t.dice.parse_notation('d12');
+        }, before_roll, after_roll);
     });
 
-    box.bind_throw($t.id('d20'), function () {
-        return $t.dice.parse_notation('d20');
-    }, before_roll, after_roll);
-    $t.bind($t.id('d20'), ['mouseup', 'touchend'], function (ev) {
-        ev.stopPropagation(); box.rolling = false;
+    $t.bind($t.id('d20'), ['mouseup'], function (ev) {
+        ev.stopPropagation();
+        box.rolling = false;
+        box.start_throw(function () {
+            return $t.dice.parse_notation('d20');
+        }, before_roll, after_roll);
     });
 
-    box.bind_throw($t.id('d100'), function () {
-        return $t.dice.parse_notation('d100');
-    }, before_roll, after_roll);
-    $t.bind($t.id('d100'), ['mouseup', 'touchend'], function (ev) {
-        ev.stopPropagation(); box.rolling = false;
+    $t.bind($t.id('d100'), ['mouseup'], function (ev) {
+        ev.stopPropagation();
+        box.rolling = false;
+        box.start_throw(function () {
+            return $t.dice.parse_notation('d100');
+        }, before_roll, after_roll);
     });
 
-    $t.bind($t.id('set'), ['keyup'], function (ev) {
+    $t.bind($t.id('dice-input'), ['keyup'], function (ev) {
         if (ev.keyCode == 13) {
             ev.stopPropagation(); box.rolling = false;
+            box.rolling = false;
             box.start_throw(function () {
-                return $t.dice.parse_notation($t.id('set').value);
+                return $t.dice.parse_notation($t.id('dice-input').value);
             }, before_roll, after_roll);
         }
     });
 
-    
+    $t.bind($t.id('dice-roll-button'), ['mouseup'], function (ev) {
+        ev.stopPropagation();
+        box.rolling = false;
+        box.start_throw(function () {
+            return $t.dice.parse_notation($t.id('dice-input').value);
+        }, before_roll, after_roll);
+    });
+
+
     box.draw_selector();
     //box.bind_mouse(container, notation_getter, before_roll, after_roll);
 }

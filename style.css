@@ -18,19 +18,6 @@ h3 {
     line-height: 23px;
 }
 
-input {
-    font-family: "Open Sans";
-    font-size: 14px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 700;
-    line-height: 23px;
-    text-align: center;
-}
-input:focus::placeholder {
-    color: transparent;
-}
-
 p {
     font-family: "Open Sans";
     font-size: 14px;
@@ -58,6 +45,29 @@ pre {
     line-height: 23px;
 }
 
+input, button {
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 23px;
+    text-align: center;
+}
+input:focus::placeholder {
+    color: transparent;
+}
+
+.no-select {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+  }
+
 .dice {
     box-shadow: 3px 3px 5px #222222;
     border-radius: 50%;
@@ -74,7 +84,6 @@ pre {
 .dice > h3{
     margin: 0;
     line-height: 60px;  
-    user-select: none;  
 }
 .dice:active {
     width: 70px;
@@ -86,9 +95,14 @@ pre {
     line-height: 70px;
 }
 
-#set {
+#dice-input {
     width: 150px;
     margin: 15px;
+}
+
+#dice-roll-button {
+    margin-left: -15px;
+    width: 50px;
 }
 
 #button-container {
