@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Marc Anderson</title>
+    <title>Dice</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="libs/huebee/huebee.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 </head>
 
 <body class="no-select">
+    <div id="color-pallette">
+        <input id="label-color-picker" class="color-input color-button" value="#aaaaaa"/>
+        <input id="dice-color-picker" class="color-input color-button" value="#202020"/>
+        <input id="background-color-picker" class="color-input color-button" value="#87cefa"/>
+        <span><i class="arrow down"></i></span>
+    </div>
 
     <div id="input-container">
         <input id="dice-input" placeholder="2d6 + 1d20 + 1d8"></input>
@@ -149,16 +156,19 @@
     </div>
     <div id="dice-box"></div>
 
-    <script src="./libs/three.min.js"></script>
-    <script src="./libs/cannon.min.js"></script>
+    <script src="libs/three.min.js"></script>
+    <script src="libs/cannon.min.js"></script>
+    <script src="libs/huebee/huebee.js"></script>
+
     <!--script type="text/javascript" src="https://drive.google.com/uc?id=0ByGeV2TiysmOelhLSnlUQ3ZMc2M"></script>
     <script type="text/javascript" src="https://drive.google.com/uc?id=0ByGeV2TiysmOczhfWW90OEV0dmM"></script-->
 
-    <script type="text/javascript" src="teal.js"></script>
-    <script type="text/javascript" src="dice.js"></script>
-    <script type="text/javascript" src="main.js"></script>
-    <script type="text/javascript" defer="defer">
+    <script src="scripts/teal.js"></script>
+    <script src="scripts/dice.js"></script>
+    <script src="scripts/app.js"></script>
+    <script defer="defer">
         dice_initialize(document.body);
+        start();
     </script>
 </body>
 
