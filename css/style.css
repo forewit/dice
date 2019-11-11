@@ -147,7 +147,7 @@ input:focus::placeholder {
 }
 
 #color-pallette {
-    position: absolute;
+    position: relative;
     background: white;
     display: flex;
     flex-direction: column;
@@ -158,7 +158,7 @@ input:focus::placeholder {
 }
 
 .arrow {
-    border: solid black;
+    border: solid #202020;
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;

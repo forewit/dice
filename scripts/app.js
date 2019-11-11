@@ -118,6 +118,7 @@ function dice_initialize() {
 }
 
 function start() {
+    //********* Huebee ************/
     // initials on multiple elements with loop
     var elems = document.querySelectorAll('.color-input');
     for (var i = 0; i < elems.length; i++) {
@@ -126,4 +127,7 @@ function start() {
             // options
         });
     }
+
+    //*********** General ************/
+    
 }
