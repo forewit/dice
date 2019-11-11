@@ -90,14 +90,6 @@ function dice_initialize() {
         }, before_roll, after_roll);
     });
 
-    $t.bind($t.id('d100'), ['pointerup'], function (ev) {
-        ev.stopPropagation();
-        box.rolling = false;
-        box.start_throw(function () {
-            return $t.dice.parse_notation('d100');
-        }, before_roll, after_roll);
-    });
-
     $t.bind($t.id('dice-input'), ['keyup'], function (ev) {
         if (ev.keyCode == 13) {
             ev.stopPropagation(); box.rolling = false;
