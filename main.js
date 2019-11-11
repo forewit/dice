@@ -109,6 +109,6 @@ function dice_initialize() {
     });
 
 
-    box.draw_selector();
+    //box.draw_selector();
     //box.bind_mouse(container, notation_getter, before_roll, after_roll);
 }
