@@ -60,7 +60,7 @@ pre {
     user-select: none;
 }
 
-input, .button {
+input {
     font-family: "Open Sans";
     font-size: 14px;
     font-style: normal;
@@ -68,8 +68,6 @@ input, .button {
     font-weight: 700;
     line-height: 23px;
     text-align: center;
-    border: none;
-    outline: none;
 }
 
 input:focus::placeholder {
@@ -81,15 +79,41 @@ input:focus::placeholder {
     box-shadow: none;
   }
 
-
+#input-container {
+    padding-top: 10px;
+    top: 0px;
+    width: 220px;
+    height: 30px;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    top: 0px;
+    width: 100%;
+}
 
 #dice-input {
     width: 150px;
-    margin-right: -25px;
-    margin-left: 15px;
-    padding: 3px;
-    display: inline-block;
-    top: 2px;
+    height: 100%;
+    padding: 0;
+    border: 2px solid #333333;
+}
+
+#dice-roll-button {
+    background: #333333;
+    height: 100%;
+    width: 50px;
+    padding: 0;
+    border: 2px solid #333333;
+    color: white;
+    font-family: "Open Sans";
+    font-size: 17px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 30px;
+    text-align: center;
 }
 
 #button-container {
@@ -98,34 +122,18 @@ input:focus::placeholder {
     flex-direction: row;
     flex-wrap: wrap-reverse;
     justify-content: center;
-    margin: auto;
     bottom: 0px;
     width: 100%;
 }
 
 .svg-dice {
-    position: relative;
     margin: 5px;
-}
-.badge {
-    position: absolute;
-    padding: 2px 7px 3px 7px;
-    margin: -5px 0 0 -32px;
-    border-radius: 10px;
-    background: red;
-    color: white;
-    font-family: "Open Sans";
-    font-size: 12px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 700;
-    line-height: 15px;
-    z-index: -1;
 }
 
 #dice-box {
+    pointer-events: none;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -100;
+    z-index: 1;
 }

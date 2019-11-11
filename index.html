@@ -10,8 +10,12 @@
 
 <body class="no-select">
 
-    <div id="button-container">
+    <div id="input-container">
+        <input id="dice-input" placeholder="2d6 + 1d20 + 1d8"></input>
+        <div id="dice-roll-button">roll</div>
+    </div>
 
+    <div id="button-container">
         <svg id="d4" class="svg-dice" width="64" height="64" version="1.1" viewBox="0 0 16.933 16.933"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <defs>
@@ -142,13 +146,6 @@
             <use transform="matrix(.35278 0 0 .35278 -88.3 -44.431)" width="100%" height="100%" fill="#e6e6e6"
                 xlink:href="#p23" />
         </svg>
-        <!--
-        <div style="display: inline-block;">
-            <input id="dice-input" placeholder="2d6 + 1d20 + 1d8"></input>
-            <div id="dice-roll-button" class="dice-button button" style="z-index: -1;">
-                <h3>roll</h3>
-            </div>
-        </div> -->
     </div>
     <div id="dice-box"></div>
 
