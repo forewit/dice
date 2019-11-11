@@ -108,6 +108,10 @@ function dice_initialize() {
         }, before_roll, after_roll);
     });
 
+    $t.bind(document.body, ['touchmove'], function (ev) {
+        ev.stopPropagation();
+        ev.preventDefault();
+    });
 
     //box.draw_selector();
     //box.bind_mouse(container, notation_getter, before_roll, after_roll);
