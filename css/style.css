@@ -185,3 +185,7 @@ input:focus::placeholder {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
   }
+  
+  #result {
+      display: none;
+  }
