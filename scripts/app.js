@@ -115,11 +115,6 @@ function dice_initialize() {
         }, before_roll, after_roll);
     });
 
-    $t.bind(document.body, ['touchmove'], function (ev) {
-        ev.stopPropagation();
-        ev.preventDefault();
-    }, { passive: false });
-
     //box.draw_selector();
     /*box.bind_mouse(container,function () {
         return $t.dice.parse_notation($t.id('dice-input').value || $t.id('dice-input').placeholder);
