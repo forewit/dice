@@ -101,6 +101,7 @@ input:focus::placeholder {
     border: 2px solid #333333;
     border-radius: 0px;
     pointer-events: all;
+    background-color: #e3e3e3;
 }
 
 #dice-roll-button {
@@ -149,7 +150,7 @@ input:focus::placeholder {
 #color-pallette {
     position: relative;
     background: white;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     padding: 0 5px 5px 5px;

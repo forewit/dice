@@ -111,7 +111,7 @@ function dice_initialize() {
     $t.bind(document.body, ['touchmove'], function (ev) {
         ev.stopPropagation();
         ev.preventDefault();
-    });
+    }, {passive: false});
 
     //box.draw_selector();
     //box.bind_mouse(container, notation_getter, before_roll, after_roll);
@@ -125,6 +125,10 @@ function start() {
         var elem = elems[i];
         var hueb = new Huebee(elem, {
             // options
+            saturations: 1,
+            hues: 9,
+            hue0: 210,
+            customColors: [ '#C25', '#E62', '#EA0', '#19F', '#333' ]
         });
     }
 
