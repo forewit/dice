@@ -16,7 +16,7 @@ function dice_initialize() {
 
     var box = new $t.dice.dice_box(container, { w: window.innerWidth, h: window.innerHeight });
     //box.animate_selector = false;
-    $t.bind(window, ['resize'], function() {
+    $t.bind(window, ['resize', 'orientationchange'], function() {
         var w = window.innerWidth
             || document.documentElement.clientWidth
             || document.body.clientWidth;
