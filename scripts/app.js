@@ -27,7 +27,6 @@ function dice_initialize() {
         // do here rpc call or whatever to get your own result of throw.
         // then callback with array of your result, example:
         // callback([2, 2, 2, 2]); // for 4d6 where all dice values are 2.
-        resize();
         callback(notation.result);
     }
 
