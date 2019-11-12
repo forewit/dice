@@ -27,6 +27,9 @@ function dice_initialize() {
         // do here rpc call or whatever to get your own result of throw.
         // then callback with array of your result, example:
         // callback([2, 2, 2, 2]); // for 4d6 where all dice values are 2.
+        container.style.width = window.innerWidth + 'px';
+        container.style.height = window.innerHeight + 'px';
+        box.reinit(container, { w: window.innerWidth, h: window.innerHeight });
         callback(notation.result);
     }
 
