@@ -188,7 +188,7 @@
     } else {
       // listen for both, for devices like Chrome Pixel
       elem[ bindMethod ]( 'mousedown', this );
-      elem[ bindMethod ]( 'touchstart', this );
+      elem[ bindMethod ]( 'touchstart', this, {passive: false});
     }
   };
   
@@ -542,7 +542,7 @@
       }
     }
     container.addEventListener( 'mousedown', onContainerPointerStart );
-    container.addEventListener( 'touchstart', onContainerPointerStart );
+    container.addEventListener( 'touchstart', onContainerPointerStart, {passive: false} );
     // create canvas
     this.createCanvas();
     // create cursor
