@@ -791,7 +791,7 @@
             ev.preventDefault();
             box.mouse_time = (new Date()).getTime();
             box.mouse_start = $t.get_mouse_coords(ev);
-        });
+        }, {passive: false});
         $t.bind(container, ['mouseup', 'touchend'], function(ev) {
             if (box.rolling) return;
             if (box.mouse_start == undefined) return;

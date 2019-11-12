@@ -16,12 +16,19 @@ function dice_initialize() {
 
     var box = new $t.dice.dice_box(container, { w: window.innerWidth, h: window.innerHeight });
     //box.animate_selector = false;
-    function resize() {
-        container.style.width = window.innerWidth + 'px';
-        container.style.height = window.innerHeight + 'px';
-        box.reinit(container, { w: window.innerWidth, h: window.innerHeight });
-    }
-    $t.bind(window, 'resize', resize());
+    $t.bind(window, ['resize'], function() {
+        var w = window.innerWidth
+            || document.documentElement.clientWidth
+            || document.body.clientWidth;
+
+        var h = window.innerHeight
+            || document.documentElement.clientHeight
+            || document.body.clientHeight;
+
+        container.style.width = w + 'px';
+        container.style.height = h + 'px';
+        box.reinit(container, { w: w, h: h });
+    });
 
     function before_roll(vectors, notation, callback) {
         // do here rpc call or whatever to get your own result of throw.
@@ -111,10 +118,12 @@ function dice_initialize() {
     $t.bind(document.body, ['touchmove'], function (ev) {
         ev.stopPropagation();
         ev.preventDefault();
-    }, {passive: false});
+    }, { passive: false });
 
     //box.draw_selector();
-    //box.bind_mouse(container, notation_getter, before_roll, after_roll);
+    /*box.bind_mouse(container,function () {
+        return $t.dice.parse_notation($t.id('dice-input').value || $t.id('dice-input').placeholder);
+    }, before_roll, after_roll);*/
 }
 
 function start() {
@@ -128,7 +137,7 @@ function start() {
             saturations: 1,
             hues: 9,
             hue0: 210,
-            customColors: [ '#C25', '#E62', '#EA0', '#19F', '#333' ]
+            customColors: ['#C25', '#E62', '#EA0', '#19F', '#333']
         });
     }
 
