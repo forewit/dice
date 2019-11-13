@@ -377,7 +377,8 @@
     this.dice_box = function(container, dimentions) {
         if (!WEBGL.isWebGLAvailable()) {
             var warning = WEBGL.getWebGLErrorMessage();
-            container.appendChild(warning)
+            container.appendChild(warning);
+            return;
         }
 
 
