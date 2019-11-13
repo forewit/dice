@@ -375,6 +375,12 @@
     var that = this;
 
     this.dice_box = function(container, dimentions) {
+        if (!WEBGL.isWebGLAvailable()) {
+            var warning = WEBGL.getWebGLErrorMessage();
+            container.appendChild(warning)
+        }
+
+
         this.use_adapvite_timestep = true;
         this.animate_selector = true;
 
@@ -831,4 +837,3 @@
     }
 
 }).apply(teal.dice = teal.dice || {});
-
