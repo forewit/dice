@@ -393,7 +393,6 @@
             ? new THREE.WebGLRenderer({ antialias: true, alpha: true })
             : new THREE.CanvasRenderer({ antialias: true, alpha: true });
         container.appendChild(this.renderer.domElement);
-        this.renderer.domElement.innerHTML="Your browser does not support WebGL!";
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFShadowMap;
         this.renderer.setClearColor(0xffffff, 0);
