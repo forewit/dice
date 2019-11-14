@@ -16,16 +16,20 @@ function dice_initialize() {
 
     var box = new $t.dice.dice_box(container, { w: window.innerWidth, h: window.innerHeight });
     //box.animate_selector = false;
-    $t.bind(window, ['resize', 'orientationchange'], function() {
+    
+    function resize () {
         var w = document.body.clientWidth;
         var h = document.body.clientHeight;
 
         container.style.width = w + 'px';
         container.style.height = h + 'px';
         box.reinit(container, { w: w, h: h });
-    });
+    }
+
+    $t.bind(window, ['resize', 'orientationchange'], resize);
 
     function before_roll(vectors, notation, callback) {
+        
         // do here rpc call or whatever to get your own result of throw.
         // then callback with array of your result, example:
         // callback([2, 2, 2, 2]); // for 4d6 where all dice values are 2.
@@ -85,6 +89,7 @@ function dice_initialize() {
     });
 
     $t.bind($t.id('d20'), ['pointerup'], function (ev) {
+        
         ev.stopPropagation();
         box.rolling = false;
         box.start_throw(function () {

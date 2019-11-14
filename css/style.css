@@ -3,8 +3,7 @@ body, html {
     background: lightseagreen;
     overflow: hidden;
     position: relative;
-    min-width: 325px;
-    min-height: 200px;
+    min-width: 154px;
     width: 100%;
     height: 100%;
 }
@@ -90,7 +89,7 @@ input:focus::placeholder {
     position: absolute;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap-reverse;
+    flex-wrap: wrap;
     justify-content: center;
     top: 15px;
     width: 100%;
@@ -164,7 +163,7 @@ input:focus::placeholder {
 
 #info-container {
     background-color: rgba(0,0,0,0.5);
-    position: absolute;
+    position: fixed;
     display: none;
     justify-content: center;
     align-items: center;
