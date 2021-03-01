@@ -13,20 +13,20 @@ miro.onReady(() => {
 
   miro.initialize({
     extensionPoints: {
-      bottomBar: {
+      bottomBar: [{
         title: 'widget counter',
         svgIcon: icon24,
         onClick: () => {
           miro.board.ui.openLeftSidebar('sidebar.html')
         },
       },
-      bottomBar: {
+      {
         title: 'Demo app button',
         svgIcon: d4icon,
         onClick: () => {
           alert('Bottom bar item has been clicked')
         }
-      },
+      },]
     },
   })
 })
