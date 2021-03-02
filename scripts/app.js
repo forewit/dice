@@ -1,7 +1,7 @@
 "use strict";
 
-function dice_initialize() {
 
+function dice_initialize() {
     var container = $t.id('dice-box');
     container.style.width = window.innerWidth + 'px';
     container.style.height = window.innerHeight + 'px';
@@ -16,8 +16,8 @@ function dice_initialize() {
 
     var box = new $t.dice.dice_box(container, { w: window.innerWidth, h: window.innerHeight });
     //box.animate_selector = false;
-    
-    function resize () {
+
+    function resize() {
         var w = document.body.clientWidth;
         var h = document.body.clientHeight;
 
@@ -29,7 +29,7 @@ function dice_initialize() {
     $t.bind(window, ['resize', 'orientationchange'], resize);
 
     function before_roll(vectors, notation, callback) {
-        
+
         // do here rpc call or whatever to get your own result of throw.
         // then callback with array of your result, example:
         // callback([2, 2, 2, 2]); // for 4d6 where all dice values are 2.
@@ -89,7 +89,7 @@ function dice_initialize() {
     });
 
     $t.bind($t.id('d20'), ['pointerup'], function (ev) {
-        
+
         ev.stopPropagation();
         box.rolling = false;
         box.start_throw(function () {
@@ -119,22 +119,23 @@ function dice_initialize() {
     /*box.bind_mouse(container,function () {
         return $t.dice.parse_notation($t.id('dice-input').value || $t.id('dice-input').placeholder);
     }, before_roll, after_roll);*/
+
+    dice_roll = function (inputString) {
+        box.rolling = false;
+        box.start_throw(function () {
+            return $t.dice.parse_notation(inputString);
+        }, before_roll, after_roll);
+    }
 }
 
 function start() {
-    //********* Huebee ************/
-    // initials on multiple elements with loop
-    var elems = document.querySelectorAll('.color-input');
-    for (var i = 0; i < elems.length; i++) {
-        var elem = elems[i];
-        var hueb = new Huebee(elem, {
-            // options
-            saturations: 1,
-            hues: 9,
-            hue0: 210,
-            customColors: ['#C25', '#E62', '#EA0', '#19F', '#333']
-        });
-    }
-
-    //*********** General ************/
+    // run automatically
 }
+
+let dice_roll
+
+window.addEventListener("message", (event) => {
+    if (event.origin !== "https://miro-rpg.firebaseapp.com") { return; }
+    
+    dice_roll(event.data)
+}, false);
