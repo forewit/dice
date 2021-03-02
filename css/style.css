@@ -1,6 +1,6 @@
 body, html {
     margin: 0;
-    background: lightseagreen;
+    background: rgba(0,0,0,0.0);
     overflow: hidden;
     position: relative;
     min-width: 154px;
