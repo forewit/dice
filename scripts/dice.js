@@ -213,15 +213,15 @@
         return materials;
     }
 
-    // d101: swffg advantage dice
-    this.create_swffg_advantage_materials = function (size, margin) {
+    // d101: swffg boost dice
+    this.create_swffg_boost_materials = function (size, margin) {
         function create_text_texture(text, color, back_color) {
             if (text == undefined) return null;
             var canvas = document.createElement("canvas");
             var context = canvas.getContext("2d");
             var ts = calc_texture_size(size + size * 2 * margin) * 2;
             canvas.width = canvas.height = ts;
-            
+
             context.fillStyle = back_color;
             context.fillRect(0, 0, canvas.width, canvas.height);
             context.textAlign = "center";
@@ -230,7 +230,7 @@
             if (text.length == 2) {
                 context.font = Math.round(ts / (1 + 3.7 * margin)) + "pt EotE";
                 context.fillText(text.substring(0, 1), 0.39 * canvas.width, 0.37 * canvas.height);
-                context.fillText(text.substring(1, 2), 0.61 *canvas.width, 0.63 * canvas.height);
+                context.fillText(text.substring(1, 2), 0.61 * canvas.width, 0.63 * canvas.height);
             } else {
                 context.font = ts / (1 + 2 * margin) + "pt EotE";
                 context.fillText(text, canvas.width / 2, canvas.height / 2);
@@ -250,15 +250,15 @@
         return materials;
     }
 
-    // d102: swffg disadvantage dice
-    this.create_swffg_disadvantage_materials = function (size, margin) {
+    // d102: swffg setback dice
+    this.create_swffg_setback_materials = function (size, margin) {
         function create_text_texture(text, color, back_color) {
             if (text == undefined) return null;
             var canvas = document.createElement("canvas");
             var context = canvas.getContext("2d");
             var ts = calc_texture_size(size + size * 2 * margin) * 2;
             canvas.width = canvas.height = ts;
-            
+
             context.fillStyle = back_color;
             context.fillRect(0, 0, canvas.width, canvas.height);
             context.textAlign = "center";
@@ -278,6 +278,103 @@
         var dice_color = "#000000"
         var label_color = "#ffffff"
         var face_labels = [' ', '0', 't', 'f', ' ', ' ', 'f', 't'];
+
+        var materials = [];
+        for (var i = 0; i < face_labels.length; ++i)
+            materials.push(new THREE.MeshPhongMaterial($t.copyto(this.material_options,
+                { map: create_text_texture(face_labels[i], label_color, dice_color) })));
+        return materials;
+    }
+
+    // d103: swffg ability dice
+    this.create_swffg_ability_materials = function (size, margin) {
+        function create_text_texture(text, color, back_color) {
+            if (text == undefined) return null;
+            var canvas = document.createElement("canvas");
+            var context = canvas.getContext("2d");
+            var ts = calc_texture_size(size + size * 2 * margin) * 2;
+            canvas.width = canvas.height = ts;
+
+            context.fillStyle = back_color;
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillStyle = color;
+
+            context.translate(canvas.width / 2, canvas.height / 2);
+            context.rotate(-0.14);
+            context.translate(-canvas.width / 2, -canvas.height / 2);
+
+            if (text.length == 2) {
+                context.font = Math.round(ts / (1 + 4.5 * margin)) + "pt EotE";
+                context.fillText(text.substring(0, 1), 0.5 * canvas.width, 0.34 * canvas.height);
+                context.fillText(text.substring(1, 2), 0.5 * canvas.width, 0.59 * canvas.height);
+            } else {
+                context.font = Math.round(ts / (1 + 3 * margin)) + "pt EotE";
+                context.fillText(text, canvas.width / 2, canvas.height / 2);
+            }
+
+            var texture = new THREE.Texture(canvas);
+            texture.needsUpdate = true;
+            return texture;
+        }
+        var dice_color = "#00a54b"
+        var label_color = "#000000"
+        var face_labels = [' ', '0', 'aa', 's', 'a', ' ', 'as', 'a', 's', 'ss'];
+
+        var materials = [];
+        for (var i = 0; i < face_labels.length; ++i)
+            materials.push(new THREE.MeshPhongMaterial($t.copyto(this.material_options,
+                { map: create_text_texture(face_labels[i], label_color, dice_color) })));
+        return materials;
+    }
+
+    // d104: swffg difficulty dice
+    this.create_swffg_difficulty_materials = function (size, margin) {
+        function create_text_texture(text, color, back_color) {
+            if (text == undefined) return null;
+            var canvas = document.createElement("canvas");
+            var context = canvas.getContext("2d");
+            var ts = calc_texture_size(size + size * 2 * margin) * 2;
+            canvas.width = canvas.height = ts;
+
+            context.fillStyle = back_color;
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillStyle = color;
+
+            context.translate(canvas.width / 2, canvas.height / 2);
+            context.rotate(Math.PI - 0.14);
+            context.translate(-canvas.width / 2, -canvas.height / 2);
+
+            if (text == 'tt') {
+                context.font = Math.round(ts / (1 + 4.5 * margin)) + "pt EotE";
+                context.fillText(text.substring(0, 1), 0.5 * canvas.width, 0.41 * canvas.height);
+                context.fillText(text.substring(1, 2), 0.5 * canvas.width, 0.67 * canvas.height);
+            } else if (text == 'tf') {
+                context.font = Math.round(ts / (1 + 4.5 * margin)) + "pt EotE";
+                context.fillText(text.substring(0, 1), 0.5 * canvas.width, 0.41 * canvas.height);
+                context.fillText(text.substring(1, 2), 0.5 * canvas.width, 0.7 * canvas.height);
+            } else if (text == 'ff') {
+                context.font = Math.round(ts / (1 + 4.5 * margin)) + "pt EotE";
+                context.fillText(text.substring(0, 1), 0.5 * canvas.width, 0.45 * canvas.height);
+                context.fillText(text.substring(1, 2), 0.5 * canvas.width, 0.7 * canvas.height);
+            } else if (text == 'f') {
+                context.font = ts / (1 + 3 * margin) + "pt EotE";
+                context.fillText(text, canvas.width / 2, Math.round(0.55 * canvas.height));
+            } else {
+                context.font = Math.round(ts / (1 + 3 * margin)) + "pt EotE";
+                context.fillText(text, canvas.width / 2, canvas.height / 2);
+            }
+
+            var texture = new THREE.Texture(canvas);
+            texture.needsUpdate = true;
+            return texture;
+        }
+        var dice_color = "#493860"
+        var label_color = "#ffffff"
+        var face_labels = [' ', '0', ' ', 'tt', 't', 'tf', 't', 'ff', 't', 'f'];
 
         var materials = [];
         for (var i = 0; i < face_labels.length; ++i)
@@ -358,15 +455,24 @@
     //this.desk_color = 0xdfdfdf;
     this.use_shadows = true;
 
-    // d101: swffg advantage dice
-    // d102: swffg disadvantage dice
-    this.known_types = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', 'd100', 'd101', 'd102'];
+    // d101: swffg boost dice
+    // d102: swffg setback dice
+    // d103: swffg ability dice
+    // d104: swffg difficulty dice
+    this.known_types = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', 'd100', 'd101', 'd102', 'd103', 'd104'];
     this.dice_face_range = {
         'd4': [1, 4], 'd6': [1, 6], 'd8': [1, 8], 'd10': [0, 9],
-        'd12': [1, 12], 'd20': [1, 20], 'd100': [0, 9], 'd101': [1,6], 'd102': [1,6]
+        'd12': [1, 12], 'd20': [1, 20], 'd100': [0, 9],
+        'd101': [1, 6], 'd102': [1, 6], 'd103': [1, 8], 'd104': [1, 8]
     };
-    this.dice_mass = { 'd4': 300, 'd6': 300, 'd8': 340, 'd10': 350, 'd12': 350, 'd20': 400, 'd100': 350, 'd102': 300, 'd101': 300 };
-    this.dice_inertia = { 'd4': 5, 'd6': 13, 'd8': 10, 'd10': 9, 'd12': 8, 'd20': 6, 'd100': 9, 'd101': 13, 'd102': 13 };
+    this.dice_mass = {
+        'd4': 300, 'd6': 300, 'd8': 340, 'd10': 350, 'd12': 350, 'd20': 400, 'd100': 350,
+        'd101': 300, 'd102': 300, 'd103': 340, 'd104': 340
+    };
+    this.dice_inertia = {
+        'd4': 5, 'd6': 13, 'd8': 10, 'd10': 9, 'd12': 8, 'd20': 6, 'd100': 9,
+        'd101': 13, 'd102': 13, 'd103': 10, 'd104': 10
+    };
 
     this.scale = 50;
 
@@ -412,18 +518,32 @@
         return new THREE.Mesh(this.d10_geometry, this.d100_material);
     }
 
-    // swffg advantage dice
+    // swffg boost dice
     this.create_d101 = function () {
         if (!this.d6_geometry) this.d6_geometry = this.create_d6_geometry(this.scale * 0.9);
-        if (!this.d101_material) this.d101_material = this.create_swffg_advantage_materials(this.scale / 2, 1.0);
+        if (!this.d101_material) this.d101_material = this.create_swffg_boost_materials(this.scale / 2, 1.0);
         return new THREE.Mesh(this.d6_geometry, this.d101_material);
     }
 
-    // swffg disadvantage dice
+    // swffg setback dice
     this.create_d102 = function () {
         if (!this.d6_geometry) this.d6_geometry = this.create_d6_geometry(this.scale * 0.9);
-        if (!this.d102_material) this.d102_material = this.create_swffg_disadvantage_materials(this.scale / 2, 1.0);
+        if (!this.d102_material) this.d102_material = this.create_swffg_setback_materials(this.scale / 2, 1.0);
         return new THREE.Mesh(this.d6_geometry, this.d102_material);
+    }
+
+    // swffg ability dice
+    this.create_d103 = function () {
+        if (!this.d8_geometry) this.d8_geometry = this.create_d8_geometry(this.scale);
+        if (!this.d103_material) this.d103_material = this.create_swffg_ability_materials(this.scale / 2, 1.0);
+        return new THREE.Mesh(this.d8_geometry, this.d103_material);
+    }
+
+    // swffg difficulty dice
+    this.create_d104 = function () {
+        if (!this.d8_geometry) this.d8_geometry = this.create_d8_geometry(this.scale);
+        if (!this.d104_material) this.d104_material = this.create_swffg_difficulty_materials(this.scale / 2, 1.0);
+        return new THREE.Mesh(this.d8_geometry, this.d104_material);
     }
 
     this.parse_notation = function (notation) {
