@@ -64,7 +64,8 @@ pre {
     user-select: none;
 }
 
-#dice-box {
+#dice-box { 
+    font-family: EotE;
     pointer-events: none;
     position: absolute;
     top: 0;
@@ -75,11 +76,4 @@ pre {
 @font-face {
     font-family: 'EotE';
     src: url(/fonts/EotE_font.otf);
-}
-
-#test {
-    font-family: EotE;
-    position: absolute;
-    left: 10px;
-    top: 10px;
 }

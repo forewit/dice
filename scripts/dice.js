@@ -239,7 +239,7 @@
             texture.needsUpdate = true;
             return texture;
         }
-        
+
         var dice_color = "#a3d6f4"
         var label_color = "#000000"
         var face_labels = [' ', '0', 'a', 'sa', ' ', ' ', 'aa', 's'];
@@ -384,6 +384,134 @@
         return materials;
     }
 
+    // d105: swffg proficiency dice
+    this.create_swffg_proficiency_materials = function (size, margin) {
+        function create_text_texture(text, color, back_color) {
+            if (text == undefined) return null;
+            var canvas = document.createElement("canvas");
+            var context = canvas.getContext("2d");
+            var ts = calc_texture_size(size + size * 2 * margin) * 2;
+            canvas.width = canvas.height = ts;
+
+            context.fillStyle = back_color;
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillStyle = color;
+
+            if (text.length == 2) {
+                context.font = Math.round(ts / (1 + 4.5 * margin)) + "pt EotE";
+                context.fillText(text.substring(0, 1), 0.5 * canvas.width, 0.34 * canvas.height);
+                context.fillText(text.substring(1, 2), 0.5 * canvas.width, 0.59 * canvas.height);
+            } else {
+                context.font = Math.round(ts / (1 + 3 * margin)) + "pt EotE";
+                context.fillText(text, canvas.width / 2, canvas.height / 2);
+            }
+
+            var texture = new THREE.Texture(canvas);
+            texture.needsUpdate = true;
+            return texture;
+        }
+        var dice_color = "#FEDA00"
+        var label_color = "#000000"
+        var face_labels = [' ', '0', 'aa', 's', 'a', ' ', 'as', 'a', 's', 'ss', ' ', ' ', ' ', ' '];
+
+        var materials = [];
+        for (var i = 0; i < face_labels.length; ++i)
+            materials.push(new THREE.MeshPhongMaterial($t.copyto(this.material_options,
+                { map: create_text_texture(face_labels[i], label_color, dice_color) })));
+        return materials;
+    }
+
+    // d106: swffg challenge dice
+    this.create_swffg_challenge_materials = function (size, margin) {
+        function create_text_texture(text, color, back_color) {
+            if (text == undefined) return null;
+            var canvas = document.createElement("canvas");
+            var context = canvas.getContext("2d");
+            var ts = calc_texture_size(size + size * 2 * margin) * 2;
+            canvas.width = canvas.height = ts;
+
+            context.fillStyle = back_color;
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillStyle = color;
+
+            if (text == 'tt') {
+                context.font = Math.round(ts / (1 + 4.5 * margin)) + "pt EotE";
+                context.fillText(text.substring(0, 1), 0.5 * canvas.width, 0.41 * canvas.height);
+                context.fillText(text.substring(1, 2), 0.5 * canvas.width, 0.67 * canvas.height);
+            } else if (text == 'tf') {
+                context.font = Math.round(ts / (1 + 4.5 * margin)) + "pt EotE";
+                context.fillText(text.substring(0, 1), 0.5 * canvas.width, 0.41 * canvas.height);
+                context.fillText(text.substring(1, 2), 0.5 * canvas.width, 0.7 * canvas.height);
+            } else if (text == 'ff') {
+                context.font = Math.round(ts / (1 + 4.5 * margin)) + "pt EotE";
+                context.fillText(text.substring(0, 1), 0.5 * canvas.width, 0.45 * canvas.height);
+                context.fillText(text.substring(1, 2), 0.5 * canvas.width, 0.7 * canvas.height);
+            } else if (text == 'f') {
+                context.font = ts / (1 + 3 * margin) + "pt EotE";
+                context.fillText(text, canvas.width / 2, Math.round(0.55 * canvas.height));
+            } else {
+                context.font = Math.round(ts / (1 + 3 * margin)) + "pt EotE";
+                context.fillText(text, canvas.width / 2, canvas.height / 2);
+            }
+
+            var texture = new THREE.Texture(canvas);
+            texture.needsUpdate = true;
+            return texture;
+        }
+        var dice_color = "#C62026"
+        var label_color = "#ffffff"
+        var face_labels = [' ', '0', 'tt', 'f', 't', ' ', 'tf', 't', 'f', 'ff', ' ', ' ', ' ', ' '];
+
+        var materials = [];
+        for (var i = 0; i < face_labels.length; ++i)
+            materials.push(new THREE.MeshPhongMaterial($t.copyto(this.material_options,
+                { map: create_text_texture(face_labels[i], label_color, dice_color) })));
+        return materials;
+    }
+
+    // d107: swffg force dice
+    this.create_swffg_force_materials = function (size, margin) {
+        function create_text_texture(text, color, back_color) {
+            if (text == undefined) return null;
+            var canvas = document.createElement("canvas");
+            var context = canvas.getContext("2d");
+            var ts = calc_texture_size(size + size * 2 * margin) * 2;
+            canvas.width = canvas.height = ts;
+
+            context.fillStyle = back_color;
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillStyle = color;
+
+            context.font = Math.round(ts / (1 + 5 * margin)) + "pt EotE";
+
+            if (text.length == 2) {
+                context.fillText(text.substring(0, 1), 0.5 * canvas.width, 0.34 * canvas.height);
+                context.fillText(text.substring(1, 2), 0.5 * canvas.width, 0.59 * canvas.height);
+            } else {
+                context.fillText(text, canvas.width / 2, canvas.height / 2);
+            }
+
+            var texture = new THREE.Texture(canvas);
+            texture.needsUpdate = true;
+            return texture;
+        }
+        var dice_color = "#ffffff"
+        var label_color = "#000000"
+        var face_labels = [' ', '0', 'zz', 'zz', 'z', 'z', 'z', 'z', 'z', 'ZZ', 'ZZ', 'Z', 'Z', 'Z'];
+
+        var materials = [];
+        for (var i = 0; i < face_labels.length; ++i)
+            materials.push(new THREE.MeshPhongMaterial($t.copyto(this.material_options,
+                { map: create_text_texture(face_labels[i], label_color, dice_color) })));
+        return materials;
+    }
+
     this.create_d4_geometry = function (radius) {
         var vertices = [[1, 1, 1], [-1, -1, 1], [-1, 1, -1], [1, -1, -1]];
         var faces = [[1, 0, 2, 1], [0, 1, 3, 2], [0, 3, 2, 3], [1, 2, 3, 4]];
@@ -460,19 +588,23 @@
     // d102: swffg setback dice
     // d103: swffg ability dice
     // d104: swffg difficulty dice
-    this.known_types = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', 'd100', 'd101', 'd102', 'd103', 'd104'];
+    // d105: swffg proficiency dice
+    // d106: swffg challenge dice
+    // d107: swffg force dice
+    this.known_types = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', 'd100',
+        'd101', 'd102', 'd103', 'd104', 'd105', 'd106', 'd107'];
     this.dice_face_range = {
         'd4': [1, 4], 'd6': [1, 6], 'd8': [1, 8], 'd10': [0, 9],
         'd12': [1, 12], 'd20': [1, 20], 'd100': [0, 9],
-        'd101': [1, 6], 'd102': [1, 6], 'd103': [1, 8], 'd104': [1, 8]
+        'd101': [1, 6], 'd102': [1, 6], 'd103': [1, 8], 'd104': [1, 8], 'd105': [1, 12], 'd106': [1, 12], 'd107': [1, 12]
     };
     this.dice_mass = {
         'd4': 300, 'd6': 300, 'd8': 340, 'd10': 350, 'd12': 350, 'd20': 400, 'd100': 350,
-        'd101': 300, 'd102': 300, 'd103': 340, 'd104': 340
+        'd101': 300, 'd102': 300, 'd103': 340, 'd104': 340, 'd105': 350, 'd106': 350, 'd107': 350
     };
     this.dice_inertia = {
         'd4': 5, 'd6': 13, 'd8': 10, 'd10': 9, 'd12': 8, 'd20': 6, 'd100': 9,
-        'd101': 13, 'd102': 13, 'd103': 10, 'd104': 10
+        'd101': 13, 'd102': 13, 'd103': 10, 'd104': 10, 'd105': 8, 'd106': 8, 'd107': 8
     };
 
     this.scale = 50;
@@ -545,6 +677,27 @@
         if (!this.d8_geometry) this.d8_geometry = this.create_d8_geometry(this.scale);
         if (!this.d104_material) this.d104_material = this.create_swffg_difficulty_materials(this.scale / 2, 1.0);
         return new THREE.Mesh(this.d8_geometry, this.d104_material);
+    }
+
+    // swffg proficiency dice
+    this.create_d105 = function () {
+        if (!this.d12_geometry) this.d12_geometry = this.create_d12_geometry(this.scale * 0.9);
+        if (!this.d105_material) this.d105_material = this.create_swffg_proficiency_materials(this.scale / 2, 1.0);
+        return new THREE.Mesh(this.d12_geometry, this.d105_material);
+    }
+
+    // swffg challenge dice
+    this.create_d106 = function () {
+        if (!this.d12_geometry) this.d12_geometry = this.create_d12_geometry(this.scale * 0.9);
+        if (!this.d106_material) this.d106_material = this.create_swffg_challenge_materials(this.scale / 2, 1.0);
+        return new THREE.Mesh(this.d12_geometry, this.d106_material);
+    }
+
+    // swffg force dice
+    this.create_d107 = function () {
+        if (!this.d12_geometry) this.d12_geometry = this.create_d12_geometry(this.scale * 0.9);
+        if (!this.d107_material) this.d107_material = this.create_swffg_force_materials(this.scale / 2, 1.0);
+        return new THREE.Mesh(this.d12_geometry, this.d107_material);
     }
 
     this.parse_notation = function (notation) {
