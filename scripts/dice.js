@@ -414,7 +414,7 @@
         }
         var dice_color = "#FEDA00"
         var label_color = "#000000"
-        var face_labels = [' ', '0', 'aa', 's', 'a', ' ', 'as', 'a', 's', 'ss', ' ', ' ', ' ', ' '];
+        var face_labels = [' ', '0', 'aa', 'a', 'aa', 'x', 's', 'as', 's', 'as', 'ss', 'as', 'ss', ' '];
 
         var materials = [];
         for (var i = 0; i < face_labels.length; ++i)
@@ -464,7 +464,7 @@
         }
         var dice_color = "#C62026"
         var label_color = "#ffffff"
-        var face_labels = [' ', '0', 'tt', 'f', 't', ' ', 'tf', 't', 'f', 'ff', ' ', ' ', ' ', ' '];
+        var face_labels = [' ', '0', 'tt', 't', 'tt', 't', 'tf', 'f', 'tf', 'f', 'ff', 'y', 'ff', ' '];
 
         var materials = [];
         for (var i = 0; i < face_labels.length; ++i)
@@ -503,7 +503,7 @@
         }
         var dice_color = "#ffffff"
         var label_color = "#000000"
-        var face_labels = [' ', '0', 'zz', 'zz', 'z', 'z', 'z', 'z', 'z', 'ZZ', 'ZZ', 'Z', 'Z', 'Z'];
+        var face_labels = [' ', '0', 'z', 'ZZ', 'z', 'ZZ', 'z', 'ZZ', 'z', 'Z', 'z', 'Z', 'z', 'zz'];
 
         var materials = [];
         for (var i = 0; i < face_labels.length; ++i)
