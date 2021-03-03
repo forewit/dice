@@ -72,3 +72,14 @@ pre {
     z-index: 1;
 }
 
+@font-face {
+    font-family: 'EotE';
+    src: url(/fonts/EotE_font.otf);
+}
+
+#test {
+    font-family: EotE;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}

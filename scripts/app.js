@@ -6,7 +6,6 @@ function dice_initialize() {
     container.style.width = window.innerWidth + 'px';
     container.style.height = window.innerHeight + 'px';
 
-    $t.dice.use_true_random = false;
     $t.dice.scale = 100;
     //$t.dice.use_shadows = false;
     //$t.dice.dice_color = '#808080';
@@ -46,79 +45,6 @@ function dice_initialize() {
             (result.reduce(function (s, a) { return s + a; }) + notation.constant);
         console.log(res);
     }
-
-    //throw options
-    $t.bind($t.id('d4'), ['pointerup'], function (ev) {
-        ev.stopPropagation();
-        box.rolling = false;
-        box.start_throw(function () {
-            return $t.dice.parse_notation('d4');
-        }, before_roll, after_roll);
-    });
-
-    $t.bind($t.id('d6'), ['pointerup'], function (ev) {
-        ev.stopPropagation();
-        box.rolling = false;
-        box.start_throw(function () {
-            return $t.dice.parse_notation('d6');
-        }, before_roll, after_roll);
-    });
-
-    $t.bind($t.id('d8'), ['pointerup'], function (ev) {
-        ev.stopPropagation();
-        box.rolling = false;
-        box.start_throw(function () {
-            return $t.dice.parse_notation('d8');
-        }, before_roll, after_roll);
-    });
-
-    $t.bind($t.id('d10'), ['pointerup'], function (ev) {
-        ev.stopPropagation();
-        box.rolling = false;
-        box.start_throw(function () {
-            return $t.dice.parse_notation('d10');
-        }, before_roll, after_roll);
-    });
-
-    $t.bind($t.id('d12'), ['pointerup'], function (ev) {
-        ev.stopPropagation();
-        box.rolling = false;
-        box.start_throw(function () {
-            return $t.dice.parse_notation('d12');
-        }, before_roll, after_roll);
-    });
-
-    $t.bind($t.id('d20'), ['pointerup'], function (ev) {
-
-        ev.stopPropagation();
-        box.rolling = false;
-        box.start_throw(function () {
-            return $t.dice.parse_notation('d20');
-        }, before_roll, after_roll);
-    });
-
-    $t.bind($t.id('dice-input'), ['keyup'], function (ev) {
-        if (ev.keyCode == 13) {
-            ev.stopPropagation(); box.rolling = false;
-            box.rolling = false;
-            box.start_throw(function () {
-                return $t.dice.parse_notation($t.id('dice-input').value);
-            }, before_roll, after_roll);
-        }
-    });
-
-    $t.bind($t.id('dice-roll-button'), ['pointerup'], function (ev) {
-        ev.stopPropagation();
-        box.rolling = false;
-        box.start_throw(function () {
-            return $t.dice.parse_notation($t.id('dice-input').value || $t.id('dice-input').placeholder);
-        }, before_roll, after_roll);
-    });
-
-    //box.draw_selector();
-    /*box.bind_mouse(container,function () {
-        return $t.dice.parse_notation($t.id('dice-input').value || $t.id('dice-input').placeholder);
-    }, before_roll, after_roll);*/
 
     dice_roll = function (inputString) {
         box.rolling = false;
