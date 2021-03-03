@@ -239,7 +239,8 @@
             texture.needsUpdate = true;
             return texture;
         }
-        var dice_color = "#b0e2fa"
+        
+        var dice_color = "#a3d6f4"
         var label_color = "#000000"
         var face_labels = [' ', '0', 'a', 'sa', ' ', ' ', 'aa', 's'];
 
