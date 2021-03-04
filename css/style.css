@@ -77,3 +77,35 @@ pre {
     font-family: EotE;
     src: url(/fonts/EotE_font.otf);
 }
+
+.toolbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    gap: 10px;
+    grid-auto-flow: column;
+}
+
+.toolbar-item {
+    width: 40px;
+    height: 40px;
+    opacity: 1.0;
+    cursor: pointer;
+}
+
+.toolbar-item:active {
+    opacity: 0.8;
+}
+
+.dragging {
+    opacity: 0.8;
+}
+
+.white-rounded {
+    margin: 20px;
+    padding: 8px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 4px 3px 9px 0px rgba(0,0,0, 0.3);
+}

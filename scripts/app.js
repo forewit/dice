@@ -1,7 +1,11 @@
-"use strict";
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+        typeof define === 'function' && define.amd ? define(['exports'], factory) :
+            (global = global || self, factory(global.gg = {}));
+}(this, (function (exports) {
+    'use strict';
 
-
-function dice_initialize() {
+    // INITIALIZE DICE*************************************
     var container = $t.id('dice-box');
     container.style.width = window.innerWidth + 'px';
     container.style.height = window.innerHeight + 'px';
@@ -46,22 +50,13 @@ function dice_initialize() {
         console.log(res);
     }
 
-    dice_roll = function (inputString) {
+    // DEFINE EXPORTS**************************************
+    exports.dice_roll = function (inputString) {
         box.rolling = false;
         box.start_throw(function () {
             return $t.dice.parse_notation(inputString);
         }, before_roll, after_roll);
     }
-}
 
-function start() {
-    // run automatically
-}
-
-let dice_roll
-
-window.addEventListener("message", (event) => {
-    if (event.origin !== "https://miro-rpg.firebaseapp.com") { return; }
-    
-    dice_roll(event.data)
-}, false);
+    Object.defineProperty(exports, '__esModule', { value: true });
+})));
