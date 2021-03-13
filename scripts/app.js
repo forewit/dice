@@ -1,5 +1,5 @@
 let saved_dice = {
-    boost: 2,
+    boost: 0,
     setback: 0,
     ability: 0,
     difficulty: 0,
@@ -8,41 +8,34 @@ let saved_dice = {
     force: 0
 }
 
+for (const dice in saved_dice) {
+    console.log(dice)
+    let elm = document.getElementById(dice);
+    let counter = elm.children[0];
+
+    elm.addEventListener('contextmenu', (e) => {
+        if (saved_dice[dice] > 0) {
+            saved_dice[dice]--;
+            counter.innerHTML = saved_dice[dice]
+            
+            if (saved_dice[dice] == 0) counter.classList.add('hidden');
+        }
+        e.preventDefault()
+    })
+
+    elm.addEventListener('click', (e) => {
+        saved_dice[dice]++
+        counter.innerHTML = saved_dice[dice]
+        counter.classList.remove('hidden');
+    })
+}
+
 let roll_saved_dice = function () {
     let inputString = `${saved_dice.boost}d101 + ${saved_dice.setback}d102 + ${saved_dice.ability}d103 + ${saved_dice.difficulty}d104 + ${saved_dice.proficiency}d105 + ${saved_dice.challenge}d106 + ${saved_dice.force}d107`
     if (saved_dice.boost || saved_dice.setback || saved_dice.ability || saved_dice.difficulty ||
         saved_dice.proficiency || saved_dice.challenge || saved_dice.force) {
         document.getElementById("dice-box").classList.remove("hidden")
         gg.roll_dice(inputString);
-    }
-}
-
-let save_dice = function (type, count) {
-    var c = document.getElementById(type).children;
-    if (saved_dice[type] == count) {
-        // clear saved dice
-        saved_dice[type] = 0;
-        for (var i = 0; i < c.length; i++) {
-            c[i].classList.add('faded');
-        }
-    } else {
-        // set saved dice
-        saved_dice[type] = count
-        for (var i = 0; i < c.length; i++) {
-            if (i < count) {
-                c[i].classList.remove('faded');
-            } else {
-                c[i].classList.add('faded');
-            }
-        }
-    }
-
-    let button = document.getElementById("roll-button")
-    if (saved_dice.boost || saved_dice.setback || saved_dice.ability || saved_dice.difficulty ||
-        saved_dice.proficiency || saved_dice.challenge || saved_dice.force) {
-        button.classList.remove('disabled')
-    } else {
-        button.classList.add('disabled')
     }
 }
 
