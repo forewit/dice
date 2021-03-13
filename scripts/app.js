@@ -9,15 +9,21 @@ let saved_dice = {
 }
 
 for (const dice in saved_dice) {
-    console.log(dice)
-    let elm = document.getElementById(dice);
-    let counter = elm.children[0];
+    let elm, counter;
+
+    try {
+        elm = document.getElementById(dice);
+        counter = elm.children[1];
+    } catch (e) {
+        console.log('Cannot find element with ID:', dice);
+        continue
+    }
 
     elm.addEventListener('contextmenu', (e) => {
         if (saved_dice[dice] > 0) {
             saved_dice[dice]--;
             counter.innerHTML = saved_dice[dice]
-            
+
             if (saved_dice[dice] == 0) counter.classList.add('hidden');
         }
         e.preventDefault()
@@ -31,9 +37,10 @@ for (const dice in saved_dice) {
 }
 
 let roll_saved_dice = function () {
-    let inputString = `${saved_dice.boost}d101 + ${saved_dice.setback}d102 + ${saved_dice.ability}d103 + ${saved_dice.difficulty}d104 + ${saved_dice.proficiency}d105 + ${saved_dice.challenge}d106 + ${saved_dice.force}d107`
     if (saved_dice.boost || saved_dice.setback || saved_dice.ability || saved_dice.difficulty ||
         saved_dice.proficiency || saved_dice.challenge || saved_dice.force) {
+
+        let inputString = `${saved_dice.boost}d101 + ${saved_dice.setback}d102 + ${saved_dice.ability}d103 + ${saved_dice.difficulty}d104 + ${saved_dice.proficiency}d105 + ${saved_dice.challenge}d106 + ${saved_dice.force}d107`
         document.getElementById("dice-box").classList.remove("hidden")
         gg.roll_dice(inputString);
     }
