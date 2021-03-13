@@ -9,23 +9,67 @@
 </head>
 
 <body>
+    <div id="clear-box" onclick="clear_saved_dice()"></div>
     <!--<iframe src="https://miro.com/app/live-embed/o9J_lR1xjDU=/?embedAutoplay=true" width="100%" height="100%"></iframe>-->
-
-    <div class="toolbar white-rounded">
-        <img src="./images/d4.svg" class="toolbar-item" onclick="gg.dice_roll('d4')" />
-        <img src="./images/d6.svg" class="toolbar-item" onclick="gg.dice_roll('d6')" />
-        <img src="./images/d8.svg" class="toolbar-item" onclick="gg.dice_roll('d8')" />
-        <img src="./images/d10.svg" class="toolbar-item" onclick="gg.dice_roll('d10')" />
-        <img src="./images/d12.svg" class="toolbar-item" onclick="gg.dice_roll('d12')" />
-        <img src="./images/d20.svg" class="toolbar-item" onclick="gg.dice_roll('d20')" />
-        <img src="./images/boost.png" class="toolbar-item" onclick="gg.dice_roll('d101')" />
-        <img src="./images/setback.png" class="toolbar-item" onclick="gg.dice_roll('d102')" />
-        <img src="./images/ability.png" class="toolbar-item" onclick="gg.dice_roll('d103')" />
-        <img src="./images/difficulty.png" class="toolbar-item" onclick="gg.dice_roll('d104')" />
-        <img src="./images/proficiency.png" class="toolbar-item" onclick="gg.dice_roll('d105')" />
-        <img src="./images/challenge.png" class="toolbar-item" onclick="gg.dice_roll('d106')" />
-        <img src="./images/force.png" class="toolbar-item" onclick="gg.dice_roll('d107')" />
+    <div class="bottom-container box-rounded">
+        <div class="toolbar">
+            <div id="ability">
+                <img src="./images/ability.png" class="toolbar-item faded" onclick="save_dice('ability', 1)" />
+                <img src="./images/ability.png" class="toolbar-item faded" onclick="save_dice('ability', 2)" />
+                <img src="./images/ability.png" class="toolbar-item faded" onclick="save_dice('ability', 3)" />
+                <img src="./images/ability.png" class="toolbar-item faded" onclick="save_dice('ability', 4)" />
+                <img src="./images/ability.png" class="toolbar-item faded" onclick="save_dice('ability', 5)" />
+            </div>
+            <div id="proficiency">
+                <img src="./images/proficiency.png" class="toolbar-item faded" onclick="save_dice('proficiency', 1)" />
+                <img src="./images/proficiency.png" class="toolbar-item faded" onclick="save_dice('proficiency', 2)" />
+                <img src="./images/proficiency.png" class="toolbar-item faded" onclick="save_dice('proficiency', 3)" />
+                <img src="./images/proficiency.png" class="toolbar-item faded" onclick="save_dice('proficiency', 4)" />
+                <img src="./images/proficiency.png" class="toolbar-item faded" onclick="save_dice('proficiency', 5)" />
+            </div>
+            <div id="boost">
+                <img src="./images/boost.png" class="toolbar-item faded" onclick="save_dice('boost', 1)" />
+                <img src="./images/boost.png" class="toolbar-item faded" onclick="save_dice('boost', 2)" />
+                <img src="./images/boost.png" class="toolbar-item faded" onclick="save_dice('boost', 3)" />
+                <img src="./images/boost.png" class="toolbar-item faded" onclick="save_dice('boost', 4)" />
+                <img src="./images/boost.png" class="toolbar-item faded" onclick="save_dice('boost', 5)" />
+            </div>
+        </div>
+        <div class="toolbar">
+            <div id="difficulty">
+                <img src="./images/difficulty.png" class="toolbar-item faded" onclick="save_dice('difficulty', 1)" />
+                <img src="./images/difficulty.png" class="toolbar-item faded" onclick="save_dice('difficulty', 2)" />
+                <img src="./images/difficulty.png" class="toolbar-item faded" onclick="save_dice('difficulty', 3)" />
+                <img src="./images/difficulty.png" class="toolbar-item faded" onclick="save_dice('difficulty', 4)" />
+                <img src="./images/difficulty.png" class="toolbar-item faded" onclick="save_dice('difficulty', 5)" />
+            </div>
+            <div id="challenge">
+                <img src="./images/challenge.png" class="toolbar-item faded" onclick="save_dice('challenge', 1)" />
+                <img src="./images/challenge.png" class="toolbar-item faded" onclick="save_dice('challenge', 2)" />
+                <img src="./images/challenge.png" class="toolbar-item faded" onclick="save_dice('challenge', 3)" />
+                <img src="./images/challenge.png" class="toolbar-item faded" onclick="save_dice('challenge', 4)" />
+                <img src="./images/challenge.png" class="toolbar-item faded" onclick="save_dice('challenge', 5)" />
+            </div>
+            <div id="setback">
+                <img src="./images/setback.png" class="toolbar-item faded" onclick="save_dice('setback', 1)" />
+                <img src="./images/setback.png" class="toolbar-item faded" onclick="save_dice('setback', 2)" />
+                <img src="./images/setback.png" class="toolbar-item faded" onclick="save_dice('setback', 3)" />
+                <img src="./images/setback.png" class="toolbar-item faded" onclick="save_dice('setback', 4)" />
+                <img src="./images/setback.png" class="toolbar-item faded" onclick="save_dice('setback', 5)" />
+            </div>
+        </div>
+        <div class="toolbar">
+            <div id="force">
+                <img src="./images/force.png" class="toolbar-item faded" onclick="save_dice('force', 1)" />
+                <img src="./images/force.png" class="toolbar-item faded" onclick="save_dice('force', 2)" />
+                <img src="./images/force.png" class="toolbar-item faded" onclick="save_dice('force', 3)" />
+            </div>
+            <div>
+                <button class="dice-button" onclick="roll_saved_dice()">ROLL</button>
+            </div>
+        </div>
     </div>
+    
 
     <div id="dice-box" class="no-select"></div>
 
@@ -35,7 +79,7 @@
 
     <script src="scripts/teal.js"></script>
     <script src="scripts/dice.js"></script>
-    <script type="module" src="./scripts/app.js"></script>
+    <script type="module" src="./scripts/gg.js"></script>
+    <script src="scripts/app.js"></script>
 </body>
-
 </html>

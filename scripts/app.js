@@ -1,62 +1,43 @@
-(function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-        typeof define === 'function' && define.amd ? define(['exports'], factory) :
-            (global = global || self, factory(global.gg = {}));
-}(this, (function (exports) {
-    'use strict';
+let saved_dice = {
+    boost: 0,
+    setback: 0,
+    ability: 0,
+    difficulty: 0,
+    proficiency: 0,
+    challenge: 0,
+    force: 0
+}
 
-    // INITIALIZE DICE*************************************
-    var container = $t.id('dice-box');
-    container.style.width = window.innerWidth + 'px';
-    container.style.height = window.innerHeight + 'px';
-
-    $t.dice.scale = 100;
-    //$t.dice.use_shadows = false;
-    //$t.dice.dice_color = '#808080';
-    //$t.dice.label_color = '#202020';
-    //$t.dice.ambient_light_color = 0xff0000;
-    //$t.dice.spot_light_color = 0xefdfd5;
-
-    var box = new $t.dice.dice_box(container, { w: window.innerWidth, h: window.innerHeight });
-    //box.animate_selector = false;
-
-    function resize() {
-        var w = document.body.clientWidth;
-        var h = document.body.clientHeight;
-
-        container.style.width = w + 'px';
-        container.style.height = h + 'px';
-        box.reinit(container, { w: w, h: h });
+let roll_saved_dice = function () {
+    let inputString = `${saved_dice.boost}d101 + ${saved_dice.setback}d102 + ${saved_dice.ability}d103 + ${saved_dice.difficulty}d104 + ${saved_dice.proficiency}d105 + ${saved_dice.challenge}d106 + ${saved_dice.force}d107`
+    if (saved_dice.boost || saved_dice.setback || saved_dice.ability || saved_dice.difficulty || 
+        saved_dice.proficiency || saved_dice.challenge || saved_dice.force ) {
+        document.getElementById("dice-box").classList.remove("hidden")
+        gg.roll_dice(inputString);
     }
+}
 
-    $t.bind(window, ['resize', 'orientationchange'], resize);
-
-    function before_roll(vectors, notation, callback) {
-
-        // do here rpc call or whatever to get your own result of throw.
-        // then callback with array of your result, example:
-        // callback([2, 2, 2, 2]); // for 4d6 where all dice values are 2.
-        callback(notation.result);
-    }
-
-    function after_roll(notation, result) {
-        var res = result.join(' ');
-        if (notation.constant) {
-            if (notation.constant > 0) res += ' +' + notation.constant;
-            else res += ' -' + Math.abs(notation.constant);
+let save_dice = function (type, count) {
+    var c = document.getElementById(type).children;
+    if (saved_dice[type] == count) {
+        // clear saved dice
+        saved_dice[type] = 0;
+        for (var i = 0; i < c.length; i++) {
+            c[i].classList.add('faded');
         }
-        if (result.length > 1) res += ' = ' +
-            (result.reduce(function (s, a) { return s + a; }) + notation.constant);
-        console.log(res);
+    } else {
+        // set saved dice
+        saved_dice[type] = count
+        for (var i = 0; i < c.length; i++) {
+            if (i < count) {
+                c[i].classList.remove('faded');
+            } else {
+                c[i].classList.add('faded');
+            }
+        }
     }
+}
 
-    // DEFINE EXPORTS**************************************
-    exports.dice_roll = function (inputString) {
-        box.rolling = false;
-        box.start_throw(function () {
-            return $t.dice.parse_notation(inputString);
-        }, before_roll, after_roll);
-    }
-
-    Object.defineProperty(exports, '__esModule', { value: true });
-})));
+let clear_saved_dice = function() {   
+   document.getElementById("dice-box").classList.add("hidden")
+}
