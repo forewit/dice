@@ -120,26 +120,31 @@ pre {
     opacity: 0.3;
 }
 
-.dice-button {
+.btn {
     position: relative;
     cursor: pointer;
     height: 25px;
     margin: 8px 10px;
-    width: 120px;
+    width: 125px;
+    transition: opacity 0.2s ease;
 
     font-family: "Open Sans";
     font-size: 12px;
     color: whitesmoke;
 
-    background: #cb4e4e;
+    background: #c95d5d;
     border: none;
     outline: none;
-    box-shadow: 0 6px #ab3c3c;
+    box-shadow: 0 6px #a84848;
     border-radius: 0 0 5px 5px;
 }
-.dice-button:active {
-    box-shadow: 0 4px #ab3c3c;
+.btn:active:not(.disabled) {
+    box-shadow: 0 4px #a84848;
     top: 2px;
+}
+.btn.disabled {
+    opacity: 0.5;
+    cursor: default;
 }
 
 .dragging {
