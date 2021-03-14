@@ -1,16 +1,16 @@
 // INITIALIZE DICE*************************************
-var container = $t.id('dice-box');
+var container = document.getElementById('dice-box');
 container.style.width = window.innerWidth + 'px';
 container.style.height = window.innerHeight + 'px';
 
-$t.dice.scale = 100;
+//$t.dice.scale = 50;
 //$t.dice.use_shadows = false;
 //$t.dice.dice_color = '#808080';
 //$t.dice.label_color = '#202020';
 //$t.dice.ambient_light_color = 0xff0000;
 //$t.dice.spot_light_color = 0xefdfd5;
 
-var box = new $t.dice.dice_box(container, { w: window.innerWidth, h: window.innerHeight });
+var box = new $t.dice.dice_box(container, { w: window.innerWidth/2, h: window.innerHeight/2 });
 //box.animate_selector = false;
 
 function resize() {
