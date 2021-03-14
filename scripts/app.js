@@ -134,8 +134,8 @@ let clear_saved_dice = function () {
             continue
         }
         saved_dice[dice] = 0;
-        counter.classList.add('hidden');
-        roll_button.classList.add('hidden');
+        counter.classList.add('disabled');
+        roll_button.classList.add('disabled');
     }
 }
 
