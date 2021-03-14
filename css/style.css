@@ -84,20 +84,19 @@ pre {
 }
 
 #roll-btn {
-    position: absolute;
-    bottom: 110px;
-    left: 0;
-    right: 0;
-
-    margin: auto;
     width: 50px;
     height: 50px;
     padding: 10px;
+    margin-bottom: 10px;
     cursor: pointer;
     color: #333333;
 }
 #roll-btn:hover{
     color: teal;
+}
+
+.flex-break {
+    flex-basis: 100%;
 }
 
 .toolbar {
