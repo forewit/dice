@@ -14,8 +14,8 @@ var box = new $t.dice.dice_box(container, { w: window.innerWidth/2, h: window.in
 //box.animate_selector = false;
 
 function resize() {
-    var w = document.body.clientWidth;
-    var h = document.body.clientHeight;
+    var w = window.innerWidth;
+    var h = window.innerWidth;
 
     container.style.width = w + 'px';
     container.style.height = h + 'px';
