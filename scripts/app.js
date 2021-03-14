@@ -34,9 +34,10 @@ let saved_dice = {
     force: 0
 }
 
-// Setup gesture recognition on dice buttons
+// enable roll button
 let roll_button = document.getElementById('roll-btn');
 
+// Setup gesture recognition on dice buttons
 for (const dice in saved_dice) {
     let elm, counter, gesture;
 
@@ -53,8 +54,8 @@ for (const dice in saved_dice) {
         // increment counter and add to saved_dice
         saved_dice[dice]++
         counter.innerHTML = saved_dice[dice]
-        counter.classList.remove('hidden');
-        roll_button.classList.remove('hidden');
+        counter.classList.remove('disabled');
+        roll_button.classList.remove('disabled');
     })
     gesture.on('rightClick', () => {
         // decrement counter and remove from saved_dice
@@ -62,19 +63,19 @@ for (const dice in saved_dice) {
             saved_dice[dice]--;
             counter.innerHTML = saved_dice[dice]
 
-            if (saved_dice[dice] == 0) counter.classList.add('hidden');
+            if (saved_dice[dice] == 0) counter.classList.add('disabled');
         }
 
         if (Object.values(saved_dice).every(item => item === 0))
-            roll_button.classList.add('hidden');
+            roll_button.classList.add('disabled');
     })
     gesture.on('longClick longPress', () => {
         // clear ounter and reset saved_dice
         saved_dice[dice] = 0;
-        counter.classList.add('hidden');
+        counter.classList.add('disabled');
 
         if (Object.values(saved_dice).every(item => item === 0))
-            roll_button.classList.add('hidden');
+            roll_button.classList.add('disabled');
     })
     gesture.start();
 }
