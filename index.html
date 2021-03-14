@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div id="clear-box" onclick="app.clear_saved_dice()"></div>
+    <div id="clear-box" onclick="clear_saved_dice()"></div>
 
     <div class="box-rounded toolbar">
         <div id="ability" class="toolbar-item">
@@ -41,7 +41,7 @@
             <div class="item-counter hidden no-select">0</div>
         </div>
 
-        <button id="roll-button" class="btn" onclick="app.roll_saved_dice()">ROLL</button>
+        <button id="roll-button" class="btn" onclick="roll_saved_dice()">ROLL</button>
     </div>
 
 
@@ -54,8 +54,9 @@
     <script src="scripts/teal.js"></script>
     <script src="scripts/dice.js"></script>
     <script src="scripts/gg.js"></script>
-    
-    <script type="module" src="scripts/app.js"></script>
+    <script src="scripts/gestures.js"></script>
+
+    <script src="scripts/app.js"></script>
 </body>
 
 </html>
