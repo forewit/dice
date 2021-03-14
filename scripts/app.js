@@ -36,6 +36,15 @@ let saved_dice = {
 
 // enable roll button
 let roll_button = document.getElementById('roll-btn');
+let rollGestures = new Gestures(roll_button)
+rollGestures.on('click tap', ()=>{ roll_saved_dice(); clear_saved_dice(); })
+rollGestures.start();
+
+// enable clear box
+let clear_box = document.getElementById('clear-box');
+let clearGestures = new Gestures(clear_box)
+clearGestures.on('click tap', ()=>{ hide_dice() })
+clearGestures.start();
 
 // Setup gesture recognition on dice buttons
 for (const dice in saved_dice) {
