@@ -14,12 +14,12 @@ var box = new $t.dice.dice_box(container, { w: window.innerWidth/2, h: window.in
 //box.animate_selector = false;
 
 function resize() {
-    var w = window.innerWidth;
-    var h = window.innerWidth;
+    var w = window.innerWidth
+    var h = window.innerHeight;
 
     container.style.width = w + 'px';
     container.style.height = h + 'px';
-    box.reinit(container, { w: w, h: h });
+    box.reinit(container, { w: w/2, h: h/2 });
 }
 
 $t.bind(window, ['resize', 'orientationchange'], resize);
