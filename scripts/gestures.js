@@ -233,7 +233,7 @@
             // LONGPRESS DETECTION
             window.setTimeout(function () {
                 // cancel long press if in the middle of a gesture
-                if (dragging || pinching) return;
+                if (me.dragging || me.pinching) return;
     
                 // verify the touch hasn't been released
                 let now = new Date();
