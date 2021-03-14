@@ -12,7 +12,7 @@
 
     // PREFERENCES
     const LONG_PRESS_DELAY = 500;
-    const DOUBLE_TAP_DELAY = 300;
+    const DOUBLE_TAP_DELAY = 100;
     const LONG_CLICK_DELAY = 500;
     const DOUBLE_CLICK_DELAY = 100;
 

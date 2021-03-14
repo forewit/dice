@@ -35,6 +35,8 @@ let saved_dice = {
 }
 
 // Setup gesture recognition on dice buttons
+let roll_button = document.getElementById('roll-btn');
+
 for (const dice in saved_dice) {
     let elm, counter, gesture;
 
@@ -47,13 +49,14 @@ for (const dice in saved_dice) {
     }
 
     gesture = new Gestures(elm)
-    gesture.on('click tap', ()=>{
+    gesture.on('click tap', () => {
         // increment counter and add to saved_dice
         saved_dice[dice]++
         counter.innerHTML = saved_dice[dice]
         counter.classList.remove('hidden');
+        roll_button.classList.remove('hidden');
     })
-    gesture.on('rightClick', ()=>{
+    gesture.on('rightClick', () => {
         // decrement counter and remove from saved_dice
         if (saved_dice[dice] > 0) {
             saved_dice[dice]--;
@@ -61,11 +64,17 @@ for (const dice in saved_dice) {
 
             if (saved_dice[dice] == 0) counter.classList.add('hidden');
         }
+
+        if (Object.values(saved_dice).every(item => item === 0))
+            roll_button.classList.add('hidden');
     })
-    gesture.on('longClick longPress', ()=>{
+    gesture.on('longClick longPress', () => {
         // clear ounter and reset saved_dice
         saved_dice[dice] = 0;
         counter.classList.add('hidden');
+
+        if (Object.values(saved_dice).every(item => item === 0))
+            roll_button.classList.add('hidden');
     })
     gesture.start();
 }
@@ -115,5 +124,20 @@ let roll_saved_dice = function () {
 }
 
 let clear_saved_dice = function () {
+    for (const dice in saved_dice) {
+        try {
+            elm = document.getElementById(dice);
+            counter = elm.children[1];
+        } catch (e) {
+            console.log('Cannot find element with ID:', dice);
+            continue
+        }
+        saved_dice[dice] = 0;
+        counter.classList.add('hidden');
+        roll_button.classList.add('hidden');
+    }
+}
+
+let hide_dice = function () {
     document.getElementById("dice-box").classList.add("hidden")
 }

@@ -748,7 +748,6 @@
             return;
         }
 
-
         this.use_adapvite_timestep = true;
         this.animate_selector = true;
 
