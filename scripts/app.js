@@ -1,7 +1,7 @@
 // INITIALIZE DICE*************************************
 var container = document.getElementById('dice-box');
-container.style.width = window.innerWidth + 'px';
-container.style.height = window.innerHeight + 'px';
+container.style.width = document.body.clientWidth + 'px';
+container.style.height = document.body.clientHeight + 'px';
 
 //$t.dice.scale = 50;
 //$t.dice.use_shadows = false;
@@ -10,12 +10,12 @@ container.style.height = window.innerHeight + 'px';
 //$t.dice.ambient_light_color = 0xff0000;
 //$t.dice.spot_light_color = 0xefdfd5;
 
-var box = new $t.dice.dice_box(container, { w: window.innerWidth/2, h: window.innerHeight/2 });
+var box = new $t.dice.dice_box(container, { w: document.body.clientWidth/2, h: document.body.clientHeight/2 });
 //box.animate_selector = false;
 
 function resize() {
-    var w = window.innerWidth
-    var h = window.innerHeight;
+    var w = document.body.clientWidth
+    var h = document.body.clientHeight;
 
     container.style.width = w + 'px';
     container.style.height = h + 'px';
