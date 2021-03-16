@@ -39,7 +39,7 @@ let saved_dice = {
     d10: 0,
     d100: 0,
     d12: 0,
-    d20: 0 
+    d20: 0
 }
 
 // enable roll button
@@ -133,17 +133,17 @@ function parse_results(results) {
     if (swffg_counts.x > 0)
         swffg_result += 'x'.repeat(swffg_counts.x)
 
-    if (swffg_counts.s - swffg_counts.f > 0)
-        swffg_result += ' ' + 's'.repeat(swffg_counts.s - swffg_counts.f);
-
-    if (swffg_counts.a - swffg_counts.t > 0)
-        swffg_result += ' ' + 'a'.repeat(swffg_counts.a - swffg_counts.t);
-
     if (swffg_counts.y > 0)
         swffg_result += ' ' + 'y'.repeat(swffg_counts.y)
 
+    if (swffg_counts.s - swffg_counts.f > 0)
+        swffg_result += ' ' + 's'.repeat(swffg_counts.s - swffg_counts.f);
+
     if (swffg_counts.f - swffg_counts.s > 0)
         swffg_result += ' ' + 'f'.repeat(swffg_counts.f - swffg_counts.s)
+
+    if (swffg_counts.a - swffg_counts.t > 0)
+        swffg_result += ' ' + 'a'.repeat(swffg_counts.a - swffg_counts.t);
 
     if (swffg_counts.t - swffg_counts.a > 0)
         swffg_result += ' ' + 't'.repeat(swffg_counts.t - swffg_counts.a)
