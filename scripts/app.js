@@ -24,14 +24,15 @@ function resize() {
 
 $t.bind(window, ['resize', 'orientationchange'], resize);
 
+// available dice types
 let saved_dice = {
-    boost: 0,
-    setback: 0,
-    ability: 0,
-    difficulty: 0,
-    proficiency: 0,
-    challenge: 0,
-    force: 0
+    d4: 0, // swffg boost
+    d6: 0, // swffg setback
+    d8: 0, // swffg ability
+    d10: 0, // swffg difficulty
+    d100: 0, // swffg proficiency
+    d12: 0, // swffg challenge
+    d20: 0 // swffg force
 }
 
 // enable roll button
@@ -119,10 +120,10 @@ function parse_results(results) {
     }
 
     // Add total to numeric result
-    if (numeric_total > 0) numeric_result += ' = ' + numeric_total;
+    if (numeric_total > 0 && isNaN(numeric_result)) numeric_result += ' = ' + numeric_total;
 
     // Cancel opposite swffg symbols
-    if (swffg_counts.x > 0) 
+    if (swffg_counts.x > 0)
         swffg_result += 'x'.repeat(swffg_counts.x)
 
     if (swffg_counts.s - swffg_counts.f > 0)
@@ -131,7 +132,7 @@ function parse_results(results) {
     if (swffg_counts.a - swffg_counts.t > 0)
         swffg_result += ' ' + 'a'.repeat(swffg_counts.a - swffg_counts.t);
 
-    if (swffg_counts.y > 0) 
+    if (swffg_counts.y > 0)
         swffg_result += ' ' + 'y'.repeat(swffg_counts.y)
 
     if (swffg_counts.f - swffg_counts.s > 0)
@@ -181,13 +182,16 @@ let clear_dice = function () {
 }
 
 let roll_saved_dice = function () {
-    if (saved_dice.boost || saved_dice.setback || saved_dice.ability || saved_dice.difficulty ||
-        saved_dice.proficiency || saved_dice.challenge || saved_dice.force) {
+    let inputString = "";
 
-        let inputString = `${saved_dice.boost}d101 + ${saved_dice.setback}d102 + ${saved_dice.ability}d103 + ${saved_dice.difficulty}d104 + ${saved_dice.proficiency}d105 + ${saved_dice.challenge}d106 + ${saved_dice.force}d107`
-        document.getElementById("dice-box").classList.remove("hidden")
-        roll_dice(inputString);
+    for (const dice in saved_dice) {
+        inputString += '+ ' + saved_dice[dice] + dice;
     }
+
+
+    //let inputString = `${saved_dice.boost}d101 + ${saved_dice.setback}d102 + ${saved_dice.ability}d103 + ${saved_dice.difficulty}d104 + ${saved_dice.proficiency}d105 + ${saved_dice.challenge}d106 + ${saved_dice.force}d107`
+    document.getElementById("dice-box").classList.remove("hidden")
+    roll_dice(inputString);
 }
 
 let clear_saved_dice = function () {
