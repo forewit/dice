@@ -43,7 +43,7 @@ rollGestures.start();
 // enable clear box
 let clear_box = document.getElementById('clear-box');
 let clearGestures = new Gestures(clear_box)
-clearGestures.on('click tap', () => { hide_dice() })
+clearGestures.on('click tap', () => { reset_visibility() })
 clearGestures.start();
 
 // enable dice buttons
@@ -167,6 +167,7 @@ function after_roll(notation, result) {
 }
 
 let roll_dice = function (inputString) {
+    document.getElementById("dice-bar").classList.add("disabled")
     document.getElementById('results').classList.add('disabled');
 
     box.rolling = false;
@@ -204,6 +205,8 @@ let clear_saved_dice = function () {
     }
 }
 
-let hide_dice = function () {
-    document.getElementById("dice-box").classList.add("hidden")
+
+let reset_visibility = function () {
+    clear_dice()
+    document.getElementById("dice-bar").classList.remove("disabled")
 }
