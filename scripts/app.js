@@ -118,8 +118,11 @@ function parse_results(results) {
     for (let i = 0; i < results.length; i++) {
         let res = results[i];
         if (typeof res == 'string') {
-            for (let j = 0; j < res.length; j++)
+            for (let j = 0; j < res.length; j++) {
                 swffg_counts[res[j]]++;
+                if (res[j] == 'x') swffg_counts.s++ // add extra success on triumph
+                if (res[j] == 'y') swffg_counts.f++ // add extra failure on dispair
+            }
         } else {
             numeric_total += res;
             numeric_result += (numeric_result.length > 0) ? ' + ' + res : res;
@@ -131,7 +134,7 @@ function parse_results(results) {
 
     // Cancel opposite swffg symbols
     if (swffg_counts.x > 0)
-        swffg_result += 'x'.repeat(swffg_counts.x)
+        swffg_result += ' ' + 'x'.repeat(swffg_counts.x)
 
     if (swffg_counts.y > 0)
         swffg_result += ' ' + 'y'.repeat(swffg_counts.y)
