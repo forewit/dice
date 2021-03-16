@@ -26,13 +26,20 @@ $t.bind(window, ['resize', 'orientationchange'], resize);
 
 // available dice types
 let saved_dice = {
-    d4: 0, // swffg boost
-    d6: 0, // swffg setback
-    d8: 0, // swffg ability
-    d10: 0, // swffg difficulty
-    d100: 0, // swffg proficiency
-    d12: 0, // swffg challenge
-    d20: 0 // swffg force
+    d101: 0, // swffg boost
+    d102: 0, // swffg setback
+    d103: 0, // swffg ability
+    d104: 0, // swffg difficulty
+    d105: 0, // swffg proficiency
+    d106: 0, // swffg challenge
+    d107: 0, // swffg force
+    d4: 0,
+    d6: 0,
+    d8: 0,
+    d10: 0,
+    d100: 0,
+    d12: 0,
+    d20: 0 
 }
 
 // enable roll button
