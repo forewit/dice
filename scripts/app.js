@@ -62,7 +62,7 @@ for (const dice in saved_dice) {
         elm = document.getElementById(dice);
         counter = elm.children[1];
     } catch (e) {
-        console.log('Cannot find element with ID:', dice);
+        //console.log('Cannot find element with ID:', dice);
         continue
     }
 
@@ -207,7 +207,7 @@ let clear_saved_dice = function () {
             elm = document.getElementById(dice);
             counter = elm.children[1];
         } catch (e) {
-            console.log('Cannot find element with ID:', dice);
+            //console.log('Cannot find element with ID:', dice);
             continue
         }
         saved_dice[dice] = 0;
