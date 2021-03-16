@@ -10,7 +10,7 @@ container.style.height = document.body.clientHeight + 'px';
 //$t.dice.ambient_light_color = 0xff0000;
 //$t.dice.spot_light_color = 0xefdfd5;
 
-var box = new $t.dice.dice_box(container, { w: document.body.clientWidth/2, h: document.body.clientHeight/2 });
+var box = new $t.dice.dice_box(container, { w: document.body.clientWidth / 2, h: document.body.clientHeight / 2 });
 //box.animate_selector = false;
 
 function resize() {
@@ -19,7 +19,7 @@ function resize() {
 
     container.style.width = w + 'px';
     container.style.height = h + 'px';
-    box.reinit(container, { w: w/2, h: h/2 });
+    box.reinit(container, { w: w / 2, h: h / 2 });
 }
 
 $t.bind(window, ['resize', 'orientationchange'], resize);
@@ -37,16 +37,16 @@ let saved_dice = {
 // enable roll button
 let roll_button = document.getElementById('roll-btn');
 let rollGestures = new Gestures(roll_button)
-rollGestures.on('click tap', ()=>{ roll_saved_dice(); clear_saved_dice(); })
+rollGestures.on('click tap', () => { roll_saved_dice(); clear_saved_dice(); })
 rollGestures.start();
 
 // enable clear box
 let clear_box = document.getElementById('clear-box');
 let clearGestures = new Gestures(clear_box)
-clearGestures.on('click tap', ()=>{ hide_dice() })
+clearGestures.on('click tap', () => { hide_dice() })
 clearGestures.start();
 
-// Setup gesture recognition on dice buttons
+// enable dice buttons
 for (const dice in saved_dice) {
     let elm, counter, gesture;
 
@@ -90,6 +90,64 @@ for (const dice in saved_dice) {
 }
 // FINISHED INITIALIZING DICE****************************
 
+function parse_results(results) {
+    let numeric_total = 0,
+        numeric_result = "",
+        swffg_result = "";
+
+    let swffg_counts = {
+        s: 0, // success
+        a: 0, // advantage
+        x: 0, // triumph
+        f: 0, // failure
+        t: 0, // threat
+        y: 0, // dispair
+        Z: 0, // light side
+        z: 0 // dark side
+    }
+
+    // loop through each result
+    for (let i = 0; i < results.length; i++) {
+        let res = results[i];
+        if (typeof res == 'string') {
+            for (let j = 0; j < res.length; j++)
+                swffg_counts[res[j]]++;
+        } else {
+            numeric_total += res;
+            numeric_result += (numeric_result.length > 0) ? ' + ' + res : res;
+        }
+    }
+
+    // Add total to numeric result
+    if (numeric_total > 0) numeric_result += ' = ' + numeric_total;
+
+    // Cancel opposite swffg symbols
+    if (swffg_counts.x > 0) 
+        swffg_result += 'x'.repeat(swffg_counts.x)
+
+    if (swffg_counts.s - swffg_counts.f > 0)
+        swffg_result += ' ' + 's'.repeat(swffg_counts.s - swffg_counts.f);
+
+    if (swffg_counts.a - swffg_counts.t > 0)
+        swffg_result += ' ' + 'a'.repeat(swffg_counts.a - swffg_counts.t);
+
+    if (swffg_counts.y > 0) 
+        swffg_result += ' ' + 'y'.repeat(swffg_counts.y)
+
+    if (swffg_counts.f - swffg_counts.s > 0)
+        swffg_result += ' ' + 'f'.repeat(swffg_counts.f - swffg_counts.s)
+
+    if (swffg_counts.t - swffg_counts.a > 0)
+        swffg_result += ' ' + 't'.repeat(swffg_counts.t - swffg_counts.a)
+
+    if (swffg_counts.Z > 0)
+        swffg_result += ' ' + 'Z'.repeat(swffg_counts.Z)
+
+    if (swffg_counts.z > 0)
+        swffg_result += ' ' + 'z'.repeat(swffg_counts.z)
+
+    return [swffg_result, numeric_result];
+}
 
 function before_roll(vectors, notation, callback) {
 
@@ -100,19 +158,17 @@ function before_roll(vectors, notation, callback) {
 }
 
 function after_roll(notation, result) {
+    let parsed = parse_results(result);
+    let results_elm = document.getElementById('results');
 
-    // log results to the console
-    var res = result.join(' ');
-    if (notation.constant) {
-        if (notation.constant > 0) res += ' +' + notation.constant;
-        else res += ' -' + Math.abs(notation.constant);
-    }
-    if (result.length > 1) res += ' = ' +
-        (result.reduce(function (s, a) { return s + a; }) + notation.constant);
-    console.log(res);
+    results_elm.classList.remove('disabled');
+    results_elm.children[0].innerHTML = parsed[0];
+    results_elm.children[1].innerHTML = parsed[1];
 }
 
 let roll_dice = function (inputString) {
+    document.getElementById('results').classList.add('disabled');
+
     box.rolling = false;
     box.start_throw(function () {
         return $t.dice.parse_notation(inputString);

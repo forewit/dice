@@ -962,6 +962,24 @@
         var matindex = closest_face.materialIndex - 1;
         if (dice.dice_type == 'd100') matindex *= 10;
         if (dice.dice_type == 'd10' && matindex == 0) matindex = 10;
+
+        // translate swffg dice
+        var swffg_boost_faces = ['a', 'sa', '', '', 'aa', 's'],
+            swffg_setback_faces = ['t', 'f', '', '', 'f', 't'],
+            swffg_ability_faces = ['aa', 's', 'a', '', 'as', 'a', 's', 'ss'],
+            swffg_difficulty_faces = ['', 'tt', 't', 'tf', 't', 'ff', 't', 'f'],
+            swffg_proficiency_faces = ['', 's', 'as', 'aa', 'ss', 'as', 'a', 'ss', 'aa', 'as', 's', 'x'],
+            swffg_challenge_faces = ['', 'tf', 't', 'ff', 'tt', 'f', 'f', 'tt', 'ff', 't', 'tf', 'y'],
+            swffg_force_faces = ['ZZ', 'z', 'z', 'ZZ', 'Z', 'z', 'z', 'Z', 'ZZ', 'z', 'z', 'zz'];
+
+        if (dice.dice_type == 'd101') matindex = swffg_boost_faces[matindex - 1];
+        if (dice.dice_type == 'd102') matindex = swffg_setback_faces[matindex - 1];
+        if (dice.dice_type == 'd103') matindex = swffg_ability_faces[matindex - 1];
+        if (dice.dice_type == 'd104') matindex = swffg_difficulty_faces[matindex - 1];
+        if (dice.dice_type == 'd105') matindex = swffg_proficiency_faces[matindex - 1];
+        if (dice.dice_type == 'd106') matindex = swffg_challenge_faces[matindex - 1];
+        if (dice.dice_type == 'd107') matindex = swffg_force_faces[matindex - 1];
+
         return matindex;
     }
 
