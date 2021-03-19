@@ -219,7 +219,6 @@ let clear_saved_dice = function () {
     }
 }
 
-
 let reset_visibility = function () {
     clear_dice()
     document.getElementById("dice-bar").classList.remove("disabled")

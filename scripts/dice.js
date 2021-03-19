@@ -2,29 +2,10 @@
 
 (function (dice) {
 
-    var random_storage = [];
-    this.use_true_random = false;
     this.frame_rate = 1 / 60;
 
-    function prepare_rnd(callback) {
-        if (!random_storage.length && $t.dice.use_true_random) {
-            try {
-                $t.rpc({ method: "random", n: 512 },
-                    function (random_responce) {
-                        if (!random_responce.error)
-                            random_storage = random_responce.result.random.data;
-                        else $t.dice.use_true_random = false;
-                        callback();
-                    });
-                return;
-            }
-            catch (e) { $t.dice.use_true_random = false; }
-        }
-        callback();
-    }
-
     function rnd() {
-        return random_storage.length ? random_storage.pop() : Math.random();
+        return Math.random();
     }
 
     function create_shape(vertices, faces, radius) {
@@ -1195,9 +1176,8 @@
             var time_int = (new Date()).getTime() - box.mouse_time;
             if (time_int > 2000) time_int = 2000;
             var boost = Math.sqrt((2500 - time_int) / 2500) * dist * 2;
-            prepare_rnd(function () {
-                throw_dices(box, vector, boost, dist, notation_getter, before_roll, after_roll);
-            });
+
+            throw_dices(box, vector, boost, dist, notation_getter, before_roll, after_roll);
         });
     }
 
@@ -1212,12 +1192,12 @@
     this.dice_box.prototype.start_throw = function (notation_getter, before_roll, after_roll) {
         var box = this;
         if (box.rolling) return;
-        prepare_rnd(function () {
-            var vector = { x: (rnd() * 2 - 1) * box.w, y: -(rnd() * 2 - 1) * box.h };
-            var dist = Math.sqrt(vector.x * vector.x + vector.y * vector.y);
-            var boost = (rnd() + 3) * dist;
-            throw_dices(box, vector, boost, dist, notation_getter, before_roll, after_roll);
-        });
+
+        var vector = { x: (rnd() * 2 - 1) * box.w, y: -(rnd() * 2 - 1) * box.h };
+        var dist = Math.sqrt(vector.x * vector.x + vector.y * vector.y);
+        var boost = (rnd() + 3) * dist;
+        throw_dices(box, vector, boost, dist, notation_getter, before_roll, after_roll);
+
     }
 
 }).apply(teal.dice = teal.dice || {});
