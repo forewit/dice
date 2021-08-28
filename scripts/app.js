@@ -195,7 +195,11 @@ let roll_saved_dice = function () {
     let inputString = "";
 
     for (const dice in saved_dice) {
-        inputString += '+ ' + saved_dice[dice] + dice;
+        if (dice == "d100") {
+            inputString += '+ ' + saved_dice[dice] + 'd100 + ' + saved_dice[dice] + 'd10';
+        } else {
+            inputString += '+ ' + saved_dice[dice] + dice;
+        }
     }
 
 
